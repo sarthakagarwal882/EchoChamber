@@ -1,0 +1,132 @@
+@keyframes ldio-d765ws09lkg {
+    0% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+
+.ldio-d765ws09lkg div {
+    left: 101.99px;
+    top: 44.485px;
+    position: absolute;
+    animation: ldio-d765ws09lkg linear 0.53475935828877s infinite;
+    background: #b0b4c4;
+    width: 13.02px;
+    height: 28.21px;
+    border-radius: 6.51px / 14.105px;
+    transform-origin: 6.51px 64.015px;
+}
+
+.ldio-d765ws09lkg div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -0.49910873440285203s;
+    background: #b0b4c4;
+}
+
+.ldio-d765ws09lkg div:nth-child(2) {
+    transform: rotate(24deg);
+    animation-delay: -0.46345811051693403s;
+    background: #e7008a;
+}
+
+.ldio-d765ws09lkg div:nth-child(3) {
+    transform: rotate(48deg);
+    animation-delay: -0.42780748663101603s;
+    background: #ff003a;
+}
+
+.ldio-d765ws09lkg div:nth-child(4) {
+    transform: rotate(72deg);
+    animation-delay: -0.39215686274509803s;
+    background: #ff6d00;
+}
+
+.ldio-d765ws09lkg div:nth-child(5) {
+    transform: rotate(96deg);
+    animation-delay: -0.35650623885918004s;
+    background: #ffc53f;
+}
+
+.ldio-d765ws09lkg div:nth-child(6) {
+    transform: rotate(120deg);
+    animation-delay: -0.32085561497326204s;
+    background: #b0b4c4;
+}
+
+.ldio-d765ws09lkg div:nth-child(7) {
+    transform: rotate(144deg);
+    animation-delay: -0.28520499108734404s;
+    background: #e7008a;
+}
+
+.ldio-d765ws09lkg div:nth-child(8) {
+    transform: rotate(168deg);
+    animation-delay: -0.24955436720142601s;
+    background: #ff003a;
+}
+
+.ldio-d765ws09lkg div:nth-child(9) {
+    transform: rotate(192deg);
+    animation-delay: -0.21390374331550802s;
+    background: #ff6d00;
+}
+
+.ldio-d765ws09lkg div:nth-child(10) {
+    transform: rotate(216deg);
+    animation-delay: -0.17825311942959002s;
+    background: #ffc53f;
+}
+
+.ldio-d765ws09lkg div:nth-child(11) {
+    transform: rotate(240deg);
+    animation-delay: -0.14260249554367202s;
+    background: #b0b4c4;
+}
+
+.ldio-d765ws09lkg div:nth-child(12) {
+    transform: rotate(264deg);
+    animation-delay: -0.10695187165775401s;
+    background: #e7008a;
+}
+
+.ldio-d765ws09lkg div:nth-child(13) {
+    transform: rotate(288deg);
+    animation-delay: -0.07130124777183601s;
+    background: #ff003a;
+}
+
+.ldio-d765ws09lkg div:nth-child(14) {
+    transform: rotate(312deg);
+    animation-delay: -0.035650623885918005s;
+    background: #ff6d00;
+}
+
+.ldio-d765ws09lkg div:nth-child(15) {
+    transform: rotate(336deg);
+    animation-delay: 0s;
+    background: #ffc53f;
+}
+
+.loadingio-spinner-spinner-m64ykq8otwr {
+    width: 70px !important;
+    height: 68px !important;
+    display: inline-block;
+    overflow: hidden;
+    background: none;
+}
+
+.ldio-d765ws09lkg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(0.4) !important;
+    backface-visibility: hidden;
+    transform-origin: 0 0;
+}
+
+.ldio-d765ws09lkg div {
+    box-sizing: content-box;
+}

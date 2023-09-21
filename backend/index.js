@@ -12,7 +12,7 @@ const auth = require('./auth');
 //Code.
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:5173'] // Replace with your frontend's origin
+  origin: ['http://localhost:5173','https://main--ech0chamber.netlify.app','https://ech0chamber.netlify.app'] // Replace with your frontend's origin
 }));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
