@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import backend_ref from '../BackendRef';
 import Cookies from 'js-cookie';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const SignUp = () => {
     const dispatch = useDispatch()
     const [regState, setRegState] = useState('true')
@@ -19,7 +19,6 @@ const SignUp = () => {
         name: "",
         gender: "",
         email: "",
-        ph_no: "",
         username: "",
         password: "",
     });
@@ -121,56 +120,58 @@ const SignUp = () => {
 
     return (
 
-        <div className='wrapper'>
-            <div className='signup'>
-                <h1 >InstaBook</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className='inp-dual'>
-                        <div className='i-signup-div'>
-                            <input onChange={handleChange} name="name" type="text" placeholder="Name" value={formData.fname} required />
-                        </div>
-                    </div>
-                    <div className='i-signup-div gender'>
-                        <h3>Gender</h3>
-                        <div className='gender-div'>
-                            <div>
-                                <label htmlFor="">Male</label>
-                                <input type='checkbox' name="male" onChange={handleCheck} checked={gender.male} />
-                            </div>
-                            <div>
-                                <label htmlFor="">Female</label>
-                                <input type="checkbox" name="female" onChange={handleCheck} checked={gender.female} />
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className='i-signup-div'>
-                        <input onChange={handleChange} name="email" type="email" placeholder="Email" value={formData.email} required />
-                    </div>
-
-                    <div className='i-signup-div'>
-                        <input onChange={handleChange} name="username" type="text" placeholder="username" value={formData.username} required />
-                    </div>
-                    <div className='inp-dual'>
-                        <div className='i-signup-div'>
-                            <input onChange={handleChange} name="password" type="password" placeholder="Password" value={formData.password} required />
-                        </div>
-                        <div className={(cfPassColor === '') ? 'i-signup-div' : cfSetColor()}>
-                            <input onChange={checkPass} name="cf_password" type="password" placeholder="Confirm password" value={formData.cf_password} required />
-                        </div>
-                    </div>
-                    {(regState) ?
-                        <button type="submit" className='btn-register'>Register</button>
-                        :
-                        <Spinner></Spinner>
-                    }
-                </form>
-                <Link to={'/login'}>
-                    <button>Already have an account? Log in!</button>
+        <div className='wrapper-signup'>
+            <div className="signup-cover">
+                <Link to={'/'}>
+                <img className='signup-close' src="/assets/close.svg" alt="" />
                 </Link>
+                <div className='signup'>
+                    <h1>Echo Chamber</h1>
+                    <form onSubmit={handleSubmit}>
+                            <div className='i-signup-div'>
+                                <input onChange={handleChange} name="name" type="text" placeholder="Name" value={formData.fname} required />
+                            </div>
+                        <div className='i-signup-div gender'>
+                            <h3>Gender</h3>
+                            <div className='gender-div'>
+                                <div>
+                                    <label htmlFor="">Male</label>
+                                    <input type='checkbox' name="male" onChange={handleCheck} checked={gender.male} />
+                                </div>
+                                <div>
+                                    <label htmlFor="">Female</label>
+                                    <input type="checkbox" name="female" onChange={handleCheck} checked={gender.female} />
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className='i-signup-div'>
+                            <input onChange={handleChange} name="email" type="email" placeholder="Email" value={formData.email} required />
+                        </div>
+
+                        <div className='i-signup-div'>
+                            <input onChange={handleChange} name="username" type="text" placeholder="username" value={formData.username} required />
+                        </div>
+                        <div className='inp-dual'>
+                            <div className='i-signup-div'>
+                                <input onChange={handleChange} name="password" type="password" placeholder="Password" value={formData.password} required />
+                            </div>
+                            <div className={(cfPassColor === '') ? 'i-signup-div' : cfSetColor()}>
+                                <input onChange={checkPass} name="cf_password" type="password" placeholder="Confirm password" value={formData.cf_password} required />
+                            </div>
+                        </div>
+                        {(regState) ?
+                            <button type="submit" className='btn-register'>Register</button>
+                            :
+                            <Spinner></Spinner>
+                        }
+                    </form>
+                    <Link className='login-already-link' to={'/login'}>
+                        <button>Already have an account? Log in!</button>
+                    </Link>
+                </div>
+                <ToastContainer />
             </div>
-            <ToastContainer />
-            <Outlet/>
         </div>
     );
 };

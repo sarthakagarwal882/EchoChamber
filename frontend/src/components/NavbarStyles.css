@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0.7rem 4rem;
+    padding: 0.9rem 4rem;
     box-shadow: 0 4px 2px -2px rgba(50, 50, 50, 0.2);
     background-color: #0f0f0f;
 }
@@ -19,7 +19,7 @@
     align-items: center;
     color: #ffffff;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 
 
@@ -34,13 +34,6 @@
 .clicked svg {
     transform: rotate(180deg);
 }
-
-.create-account-p {
-    color: #e58014;
-}
-
-
-
 
 
 
@@ -93,7 +86,7 @@
 }
 
 .nav-dropdown {
-    /* margin: 1rem 0 0 0 !important; */
+    position: relative;
     padding: 0 !important;
     display: flex;
     flex-direction: column;
@@ -104,12 +97,11 @@
     position: absolute;
     padding: 5px 0 5px 0 !important;
     margin: 0 !important;
-    right: 1.7rem;
-    top: 4.1rem;
-    width: 10rem;
-    height: 9rem;
+    right: 0;
+    top: 4.3rem;
+    width: 9.5rem;
     border-radius: 5px;
-    background-color: rgb(61, 61, 61);
+    background-color: #282828;
 }
 
 .nav-drop-menu hr {
@@ -125,8 +117,55 @@
     align-items: center;
     height: 3rem;
     transition: 0.2s;
+    color: #ffffff;
 }
 
 .nav-drop-menu div:hover {
     background-color: rgb(153, 153, 153);
+}
+
+.nav-create-account-link{
+    padding: 0.7rem 1.5rem;
+    margin: 0.1rem;
+    transition: 0.05s ease-in-out;
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+.nav-create-account-link:hover{
+    border: 2px solid #e58014;
+}
+
+.nav-create-account-p {
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.nav-create-account-p span {
+    transition: 0.1s ease-in-out;
+    color: #e58014;
+}
+
+.nav-create-account-p:hover span {
+    transform: scale(1.05);
+}
+
+.nav-unsigned {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.nav-login-link{
+    margin: 0 3rem 0 0;
+}
+.nav-login-link button{
+    padding:0.8rem 1.6rem;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+.nav-login-link button:hover{
+    background-color: #e58014;
+    color: #ffffff;
 }

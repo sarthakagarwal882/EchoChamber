@@ -68,9 +68,14 @@ const Navbar = () => {
                                 </div>
                             </div>
                             :
-                            <Link to={'/signup'}>
-                                <p className="create-account-p">Create account. <span>It's free!</span></p>
-                            </Link>
+                            <div className="nav-unsigned">
+                                <Link className="nav-login-link" to={'/login'}>
+                                    <button>Login</button>
+                                </Link>
+                                <Link className="nav-create-account-link" to={'/signup'}>
+                                    <p className="nav-create-account-p">Create account. <span>It's free!</span></p>
+                                </Link>
+                            </div>
                     }
 
                 </div>
