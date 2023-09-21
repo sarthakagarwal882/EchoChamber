@@ -6,6 +6,7 @@
     padding: 0.9rem 4rem;
     box-shadow: 0 4px 2px -2px rgba(50, 50, 50, 0.2);
     background-color: #0f0f0f;
+    height: 5rem;
 }
 
 .navbar a {
@@ -19,7 +20,7 @@
     align-items: center;
     color: #ffffff;
     font-weight: 700;
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 
 
@@ -35,17 +36,10 @@
     transform: rotate(180deg);
 }
 
-
-
-
 .nav-auth {
     display: flex;
     flex-direction: row;
     margin: auto 2vw auto 0;
-}
-
-.nav-auth a {
-    text-decoration: none;
 }
 
 .profile-div {
@@ -54,7 +48,7 @@
     align-items: center;
     background-color: rgb(61, 61, 61);
     cursor: pointer;
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
 }
 
@@ -99,7 +93,7 @@
     margin: 0 !important;
     right: 0;
     top: 4.3rem;
-    width: 9.5rem;
+    width: 9.1rem;
     border-radius: 5px;
     background-color: #282828;
 }
@@ -125,7 +119,7 @@
 }
 
 .nav-create-account-link{
-    padding: 0.7rem 1.5rem;
+    padding: 0.7rem 1.4rem;
     margin: 0.1rem;
     transition: 0.05s ease-in-out;
     border: 2px solid transparent;
@@ -137,7 +131,7 @@
 
 .nav-create-account-p {
     color: #ffffff;
-    font-size: 1.2rem;
+    font-size: 1.05rem;
 }
 
 .nav-create-account-p span {
@@ -159,9 +153,10 @@
     margin: 0 3rem 0 0;
 }
 .nav-login-link button{
-    padding:0.8rem 1.6rem;
+    padding:0.7rem 1.4rem;
+    margin: 0.1rem;
     border-radius: 4px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     font-weight: 600;
 }

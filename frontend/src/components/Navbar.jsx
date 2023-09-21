@@ -53,7 +53,7 @@ const Navbar = () => {
                     {
                         ('username' in state) ?
                             <div className="nav-dropdown">
-                                <div onClick={setDropdownFunc} className="profile-div">
+                                <div role="button" onClick={setDropdownFunc} className="profile-div">
                                     <p>{state.username}</p>
                                     <span className={setProfileImg()}></span>
                                 </div>

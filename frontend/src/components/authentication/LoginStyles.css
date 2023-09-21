@@ -27,13 +27,13 @@
     position: absolute;
     top: 0;
     right: 0;
-    transform: scale(1.7);
+    transform: scale(1.4);
 }
 
 .login {
     text-align: center;
     width: 92%;
-    height: 90%;
+    height: 92%;
 
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 8px 32px 0 rgba(135, 31, 31, 0.37);
@@ -51,7 +51,7 @@
 
 .login h1 {
     color: #f94940;
-    font-size: 3.2rem;
+    font-size: 3rem;
     display: flex;
     align-items: center;
     margin: 0 0 0 0;
@@ -64,7 +64,7 @@
 
 .login form {
     padding-top: 4rem;
-    margin: 0 0 -4rem 0;
+    margin: -2rem 0 -4rem 0;
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -85,7 +85,7 @@
 
     margin: 25px;
     border-radius: 5px;
-    height: 3.8rem;
+    height: 3.5rem;
 }
 
 .login input {
@@ -110,8 +110,8 @@
 .btn-login {
     width: 40%;
     margin: 0.7rem auto 0;
-    padding: 15px;
-    font-size: 1.3rem;
+    padding: 12px;
+    font-size: 1.2rem;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
@@ -129,13 +129,13 @@
     text-decoration: none;
     color: #434141;
     display: block;
-    width: 30%;
+    width: 40%;
     margin: auto;
 }
 
 .forgot-pass {
     margin: 0.5rem 0 0 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     display: block;
 }
 
@@ -149,7 +149,7 @@
     width: 100%;
     padding: 0.9rem 0 0.9rem 0;
     cursor: pointer;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 500;
     border-radius: 5px;
     border: none;
