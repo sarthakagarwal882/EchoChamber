@@ -1,0 +1,56 @@
+.location {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+}
+
+
+.location-inp {
+    width: 77%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.location-inp svg{
+    font-size: 2rem;
+}
+
+.location-inp input {
+    width: 100%;
+    height: 1.8rem;
+    font-size: 1.2rem;
+    border: none;
+}
+.location-inp input:focus{
+    outline: none;
+}
+.location hr {
+    width: 80%;
+    border: #B8B8B8 1px solid;
+    margin: 1rem 0 0 0;
+}
+
+.location-message {
+    margin: 2rem 0 0 0 ;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 82%;
+}
+
+.location-message svg {
+    opacity: 0.5;
+    font-size: 2.5rem;
+    margin: 0 0.7rem 0 0;
+}
+
+.location-message p {
+    font-weight: 500;
+    opacity: 0.5;
+    font-size: 1rem;
+}

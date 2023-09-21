@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
-// import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import './LoginStyles.css'
 import Spinner from "../Spinner/Spinner";
@@ -7,12 +7,12 @@ import { useDispatch } from "react-redux"
 import { login } from '../../Store/slice/userSlice'
 import Cookies from "js-cookie";
 import backend_ref from "../BackendRef";
+import { Link ,Outlet, useNavigate} from "react-router-dom";
 
 const Login = () => {
-    console.log('aaaa');
     const dispatch = useDispatch()
     const [submitState, setSubmitState] = useState('true')
-    // const navigateTo = useNavigate();
+    const navigateTo = useNavigate();
     let [credentials, setCredentials] = useState({
         username: "",
         password: ""
@@ -38,10 +38,12 @@ const Login = () => {
         try {
             setSubmitState()
             const check = await axios.post(backend_ref + '/login', { credentials });
-            if (check.data.data) {
-                dispatch(login(check.data.data))
-                Cookies.set('instaBookCredentials',JSON.stringify({token:check.data.token}),{expires:30})
-                // navigateTo('/')
+            if (check.data.cookieData) {
+                console.log(check.data.cookieData);
+                dispatch(login(check.data.cookieData))
+                Cookies.set('echoChamberCred', JSON.stringify({ token: check.data.token }), { expires: 30 })
+                navigateTo('/')
+                
             }
             else {
                 setSubmitState('true')
@@ -72,10 +74,12 @@ const Login = () => {
                         :
                         <Spinner></Spinner>
                     }
-                    <button>Dont have an account? Sign up!</button>
+                    <Link to={'/signup'}>
+                        <button>Dont have an account? Sign up!</button>
+                    </Link>
                 </form>
-
             </div>
+            <Outlet/>
         </div>
     );
 };

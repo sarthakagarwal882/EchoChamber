@@ -9,10 +9,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import backend_ref from '../BackendRef';
 import Cookies from 'js-cookie';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 const SignUp = () => {
     const dispatch = useDispatch()
     const [regState, setRegState] = useState('true')
-    // const navigateTo = useNavigate();
+    const navigateTo = useNavigate();
     const [cfPassColor, setCfPassColor] = useState("")
     const [formData, setFormData] = useState({
         name: "",
@@ -26,7 +27,6 @@ const SignUp = () => {
         male: false,
         female: false,
     })
-
 
 
     function handleSubmit(e) {
@@ -57,12 +57,10 @@ const SignUp = () => {
 
     async function sendData() {
         const check = await axios.post(backend_ref + "/register", { formData });
-        // console.log(check);
         if (check.data.data) {
-            Cookies.set('instaBookCredentials', JSON.stringify({ token: check.data.token }), { expires: 30 })
-            // console.log('cookie- '+Cookies.get('instaBookCredentials'));
+            Cookies.set('echoChamberCred', JSON.stringify({ token: check.data.token }), { expires: 30 })
             dispatch(login(check.data))
-            // navigateTo('/');
+            navigateTo('/');
         }
         else if (check.data === false) {
             setRegState('true')
@@ -149,13 +147,9 @@ const SignUp = () => {
                     <div className='i-signup-div'>
                         <input onChange={handleChange} name="email" type="email" placeholder="Email" value={formData.email} required />
                     </div>
-                    <div className='inp-dual'>
-                        <div className='i-signup-div'>
-                            <input onChange={handleChange} name="ph_no" type="tel" placeholder="Phone number" value={formData.ph_no} required />
-                        </div>
-                        <div className='i-signup-div'>
-                            <input onChange={handleChange} name="username" type="text" placeholder="username" value={formData.username} required />
-                        </div>
+
+                    <div className='i-signup-div'>
+                        <input onChange={handleChange} name="username" type="text" placeholder="username" value={formData.username} required />
                     </div>
                     <div className='inp-dual'>
                         <div className='i-signup-div'>
@@ -171,9 +165,12 @@ const SignUp = () => {
                         <Spinner></Spinner>
                     }
                 </form>
-                <button>Already have an account? Log in!</button>
+                <Link to={'/login'}>
+                    <button>Already have an account? Log in!</button>
+                </Link>
             </div>
             <ToastContainer />
+            <Outlet/>
         </div>
     );
 };

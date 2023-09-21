@@ -14,40 +14,22 @@ async function insertData(data) {
   const db = client.db(dataBase);
   const coll1 = db.collection(userCred);
   const coll2 = db.collection(userData);
-  const data2 = {
+  const userSchema = {
     username: data.username,
-    name: data.name,
-    gender: data.gender,
-    watching: {
-      movies: [],
-      tv: []
-    },
-    completed: {
-      movies: [],
-      tv: []
-    },
-    on_hold: {
-      movies: [],
-      tv: []
-    },
-    dropped: {
-      movies: [],
-      tv: []
-    },
-    plan_to_watch: {
-      movies: [],
-      tv: []
-    }
+    posts: []
   }
   try {
-    if (((await coll1.insertOne(data)).acknowledged) && ((await coll2.insertOne(data2)).acknowledged)) {
-      return (true);
+    let insertCred = await coll1.insertOne(data)
+    let insertData =await coll2.insertOne(userSchema)
+    if ((insertCred.acknowledged) && (insertData.acknowledged)) {
+      return (insertCred.insertedId);
     }
     else {
       return (false)
     }
   }
   catch (err) {
+    console.log(err);
   }
 }
 
@@ -63,10 +45,14 @@ async function verifyToken(token) {
         username: tokenData.username
       }
       const db = client.db(dataBase);
-      const coll1 = db.collection(userData)
+      const coll1 = db.collection(userCred)
       const query = await coll1.findOne(data);
       if (query._id.toString() == tokenData.id) {
-        return (query);
+        return ({
+          username:query.username,
+          name:query.name,
+          gender:query.gender
+        });
       }
     }
     catch (err) {
@@ -89,18 +75,16 @@ async function checkLoginData(data) {
     }
     else {
       try {
-        userData = await coll2.findOne(data2)
         let cookieData = {
-          id: userData._id,
-          username: userData.username,
-          name: userData.name,
-          gender: userData.gender
+          id: query._id,
+          username: query.username,
+          name: query.name,
+          gender: query.gender
         }
         let expTime = '30 days'
         let token = jwt.sign(cookieData, process.env.TOKEN, { expiresIn: expTime, audience: process.env.JWT_AUD });
         let finalData = {
           cookieData: cookieData,
-          data: userData,
           token: token,
           expireTime: expTime,
         }
@@ -124,19 +108,18 @@ async function checkUsername(data) {
   const check = await coll.findOne({ username: data.username });
   if (check == null) {
     if ('name' in data) {
-      if (await insertData(data)) {
-        let userData = (await coll1.findOne({ username: data.username }))
+      let insertUser=await insertData(data)
+      if (insertUser) {
         let cookieData = {
-          id: userData._id,
-          username: userData.username,
-          name: userData.name,
-          gender: userData.gender
+          id: insertUser,
+          username: data.username,
+          name: data.name,
+          gender: data.gender
         }
         let expTime = '30 days'
         var token = jwt.sign(cookieData, process.env.TOKEN, { expiresIn: expTime, audience: process.env.JWT_AUD });
         let finalData = {
           cookieData: cookieData,
-          data: userData,
           token: token,
           expireTime: expTime
         }
@@ -204,7 +187,6 @@ function auth(app) {
   //Register post request
   app.post('/register', async (req, res) => {
     const message = req.body.formData;
-    console.log(message);
     res.json(await checkUsername(await hashPass(message)));
   });
 }
