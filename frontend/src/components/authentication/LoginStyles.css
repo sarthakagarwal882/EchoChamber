@@ -161,3 +161,91 @@
     background-color: #f94940;
     color: #ffffff;
 }
+
+@media only screen and (max-width:1200px) {
+    .login-cover {
+        position: relative;
+        margin: auto;
+        text-align: center;
+        width: 60%;
+        height: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width:1000px) {
+    .login-cover {
+        position: relative;
+        margin: auto;
+        text-align: center;
+        width: 65%;
+        height: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .signup-no-acc-link {
+        width: 80%;
+        margin: auto;
+        margin: 2rem auto;
+    }
+
+}
+
+@media only screen and (max-width:800px) {
+    .login-cover {
+        position: relative;
+        margin: auto;
+        text-align: center;
+        width: 75%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
+
+@media only screen and (max-width:700px) {
+    .login-cover {
+        position: relative;
+        margin: auto;
+        text-align: center;
+        width: 80%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
+
+@media only screen and (max-width:600px) {
+    .login-cover {
+        position: relative;
+        margin: auto;
+        text-align: center;
+        width: 95%;
+        height: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .forgot-pass-link {
+        text-decoration: none;
+        color: #434141;
+        display: block;
+        width: 50%;
+        margin: auto;
+    }
+
+    .forgot-pass {
+        margin: 0.7rem 0 0 0;
+        font-size: 1rem;
+        display: block;
+    }
+}
