@@ -112,6 +112,18 @@ async function likePost(message, res, action) {
     }
 }
 
+async function getStats(message,res) {
+    try {
+        const db = client.db(dataBase);
+        const coll2 = db.collection(commonData);
+        const data = await coll2.findOne({ uniqueId: message.id })
+        res.json({likes:data.likes,comments:data.comments})
+    }
+    catch (e) {
+
+    }
+}
+
 function post(app) {
     app.post('/postData', async (req, res) => {
         const message = req.body.data;
@@ -130,8 +142,13 @@ function post(app) {
         const message = req.body.data
         likePost(message, res, 'unlike')
     })
-    app.get('/test',()=>{
+    app.get('/test', () => {
         res.json('Test Successful!')
+    })
+    app.post('/getstats', async (req, res) => {
+        let message = req.body.data
+        // console.log(message);
+        getStats(message,res)
     })
 }
 
