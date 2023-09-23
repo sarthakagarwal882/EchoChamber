@@ -7,45 +7,49 @@ import { BsDot } from 'react-icons/bs'
 import "./CardStyles.css"
 
 const Card = (props) => {
-    // const [viewport, setViewport] = useState(window.innerWidth <= 1000 ? true : false)
+    let { date, post, gender, id, username, likes, comments } = props
 
-    // let { img, type, header, desc, date, location, button, profileName, profileImg, company, views, buttonColor } = props
-
-    let date = 'Sun, 24 Sep 2023, 00:00'
-    let post = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    let likes = 30
-    let comments = 10
-
+    const handleLike = async (event) => {
+        
+    }
+    const handleComment = async (event) => {
+        console.log(event.target);
+    }
+    console.log(id);
 
     return (
         <div className="card">
             <div className="card-header">
                 <div className='card-user'>
-                    <img src="/assets/man.png" alt="" />
-                    <p>Yash</p>
+                    <img src={(gender === 'male') ? '/assets/man.png' : '/assets/woman.png'} alt="" />
+                    <p>{username}</p>
                 </div>
                 <div className='card-date'>
                     <BsDot />
                     <p>{date}</p>
                 </div>
             </div>
-            <hr />
-            <div className='card-post'>
-                <div className="post-text">
-                    <p>{post}</p>
-                </div>
-                <div className='like-comment'>
-                    <div className='likes'>
-                        <AiFillLike />
-                        <p>{likes}</p>
+            {/* <hr /> */}
+            <div className='card-post-wrapper'>
+
+                <div className='card-post'>
+                    <div className="post-text">
+                        <p>{post}</p>
                     </div>
-                    <div className='comments'>
-                        <BiSolidComment />
-                        <p>{comments}</p>
+                    <div className='like-comment'>
+                        <div className='likes'>
+                            <AiFillLike name='like' onClick={handleLike} />
+                            <p>{likes}</p>
+                        </div>
+                        <div className='comments'>
+                            <BiSolidComment name='comment' onClick={handleComment} />
+                            <p>{comments.length}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='comments'>
+
+                <div className='comments'>
+                </div>
 
             </div>
 

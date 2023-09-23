@@ -1,45 +1,80 @@
 .card {
-    width: 50%;
+    width: 40%;
     margin: 2rem auto 0;
-    border: 1px solid #E0E0E0;
     border-radius: 4px;
     color: #ffffff;
+    margin: 2rem auto 3rem ;
 }
 
 .card-header {
-    height: 3rem;
+    height: 2.5rem;
     width: 100%;
     padding: 0 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.card-user{
+
+.card-user {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.card-user img{
+
+.card-user img {
     width: 30px;
     height: 30px;
     margin: 0 15px 0 0;
 }
 
-.card-date{
+.card-date {
     display: flex;
     align-items: center;
+    color: #757575;
+    font-size: 0.9rem;
+    font-weight: 300;
 }
-.card-date svg{
+
+.card-date svg {
     font-size: 2rem;
     margin: 0 1rem 0 0;
 }
 
-.card-post{
-    
+
+.card-post-wrapper {
+    border: 2px solid #323232;
+    border-radius: 10px;
 }
 
 
+.card-post {
+    /* padding: 1.3rem; */
+}
 
+.card-post .post-text {
+    padding: 1rem;
+    border: 1px solid #323232;
+    border-radius: 10px;
+}
+
+.card-post .like-comment{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card-post .like-comment div{
+    margin:  0.5rem 1.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.card-post .like-comment div svg{
+    font-size: 1.5rem;
+    margin: 0 0.6rem 0 0;
+    cursor: pointer;
+}
 
 
 

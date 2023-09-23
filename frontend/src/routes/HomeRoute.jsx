@@ -26,7 +26,6 @@ const HomeRoute = () => {
         <>
             <Navbar />
             <Home/>
-            
             <Outlet />
         </>
     )
