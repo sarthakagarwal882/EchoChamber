@@ -11,7 +11,6 @@ const Home = () => {
         const getPosts = async () => {
             const data = await axios.get(backend_ref + '/getData');
             setPosts(data.data);
-            console.log(data.data);
         }
         getPosts()
     }  , [])
@@ -21,7 +20,7 @@ const Home = () => {
             <Post />
             <>
                 {(posts.length > 0) &&
-                    (posts).map((item) => {return (<Card key={item._id} id={item.post.uniqueId} username={item.post.username} post={item.post.post} likes={item.post.likes} date={item.post.date} gender={item.post.gender} comments={item.post.comments} />) })
+                    (posts).map((item) => {return (<Card key={item._id} id={item.uniqueId} username={item.username} post={item.post} likes={item.likes} date={item.date} gender={item.gender} comments={item.comments} />) })
                 }
             </>
         </div>

@@ -72,7 +72,7 @@ const CreatePost = () => {
 
                     <div className='user-info'>
                         <img src="/assets/man.png" alt="" />
-                        <p>ksdxnawk;ndkw;</p>
+                        <p>{user.username}</p>
                     </div>
                     <div className='createpost-form'>
                         <form onSubmit={handleSubmit}>

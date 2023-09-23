@@ -23,23 +23,22 @@ async function postuser(data) {
                 comments: [],
                 date: data.date,
                 gender: data.gender,
-                uniqueId:uniqueId
-            }
-            let finalDataAll = {
-                post: data.post,
-                likes: 0,
-                comments: [],
-                date: data.date,
-                gender: data.gender,
-                username: data.username,
-                uniqueId:uniqueId
+                uniqueId: uniqueId
             }
             const storeUserData = await coll1.updateOne(
                 { username: data.username },
                 { $push: { posts: finalDataUser } }
             )
             const storeCommomData = await coll2.insertOne(
-                { post: finalDataAll }
+                {
+                    post: data.post,
+                    likes: [],
+                    comments: [],
+                    date: data.date,
+                    gender: data.gender,
+                    username: data.username,
+                    uniqueId: uniqueId
+                }
             )
             if (storeUserData.acknowledged && storeCommomData.acknowledged)
                 return true
@@ -55,12 +54,58 @@ async function postuser(data) {
 async function getPosts() {
     try {
         const db = client.db(dataBase);
-        const coll = db.collection(userCred);
-        const coll1 = db.collection(userData);
         const coll2 = db.collection(commonData);
 
         let data = await coll2.find({}).toArray();
         return (data);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+async function likePost(message, res, action) {
+    try {
+        const db = client.db(dataBase);
+        const coll = db.collection(userCred);
+        const coll1 = db.collection(userData);
+        const coll2 = db.collection(commonData);
+        let like2;
+        if (action === 'like') {
+            like2 = await coll2.updateOne(
+                { uniqueId: message.id },
+                { $push: { likes: message.myUsername } }
+            )
+        }
+        else {
+            like2 = await coll2.updateOne(
+                { uniqueId: message.id },
+                { $pull: { likes: message.myUsername } }
+            )
+        }
+
+
+        const collection1 = await coll1.findOne({ username: message.postUsername })
+        if (collection1 !== null) {
+            (collection1.posts).forEach(async (element, index) => {
+                if (element.uniqueId === message.id) {
+                    if (action === 'like') {
+                        let checkUpdate = await coll1.updateOne({ username: message.postUsername }, {
+                            $push: { [`posts.${index}.likes`]: message.myUsername }
+                        })
+                        res.json(checkUpdate.acknowledged && like2.acknowledged)
+                    }
+                    else {
+                        let checkUpdate = await coll1.updateOne({ username: message.postUsername }, {
+                            $pull: { [`posts.${index}.likes`]: message.myUsername }
+                        })
+                        res.json(checkUpdate.acknowledged && like2.acknowledged)
+                    }
+                }
+
+            });
+        }
+
     }
     catch (err) {
         console.log(err);
@@ -75,6 +120,15 @@ function post(app) {
 
     app.get('/getData', async (req, res) => {
         res.json(await getPosts());
+    })
+
+    app.post('/like', async (req, res) => {
+        const message = req.body.data
+        likePost(message, res, 'like')
+    })
+    app.post('/rmlike', async (req, res) => {
+        const message = req.body.data
+        likePost(message, res, 'unlike')
     })
 }
 
