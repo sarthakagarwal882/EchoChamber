@@ -193,10 +193,11 @@ function post(app) {
         const message = req.body.data
         likePost(message, res, 'unlike')
     })
-    app.get('/test', () => {
+    app.get('/test', (req,res) => {
         res.json('Test Successful!')
     })
     app.post('/getstats', async (req, res) => {
+        
         let message = req.body.data
         getStats(message, res)
     })
