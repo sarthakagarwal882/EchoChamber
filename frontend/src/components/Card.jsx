@@ -15,8 +15,9 @@ import { useEffect, useState } from 'react'
 const Card = (props) => {
     const navigateTo = useNavigate()
     let user = useSelector((store) => (store.user.data))
-    let [comment, setComment] = useState('')
+    const [comment, setComment] = useState('')
     const [liked, setLiked] = useState('#ffffff');
+    const [commentBar, setCommentBar] = useState('none')
     let { date, post, gender, id, username, likes, comments } = props
     const [data, setData] = useState({
         date: date,
@@ -35,13 +36,11 @@ const Card = (props) => {
 
     useEffect(() => {
         let checkLike = ((data.likes).filter(element => (element === user.username)))
-
         if (checkLike.length > 0)
             setLiked('#0072E8')
         else {
             setLiked('#ffffff')
         }
-
     }, [])
 
 
@@ -76,30 +75,38 @@ const Card = (props) => {
             }
         }
 
-
         else {
             toast('Login First!')
             navigateTo('/login')
         }
 
     }
-
-
 
 
 
     const handleComment = async (e) => {
-        e.preventDefault
+        e.preventDefault()
         if ('username' in user) {
-            const commentCheck = await axios.post('/comment', { data: { id: id, myUsername: user.username, postUsername: username, comment: comment } })
+            const commentCheck = await axios.post(backend_ref + '/comment', { data: { id: id, myUsername: user.username, postUsername: username, comment: comment, gender: user.gender } })
+            console.log(commentCheck);
         }
         else {
             toast('Login First!')
             navigateTo('/login')
         }
     }
-    const handleCommentChange = () => {
-        setComment(data)
+
+
+    const handleCommentChange = (e) => {
+        setComment(e.target.value)
+    }
+
+
+    const handleCommentBar = () => {
+        if (commentBar === 'none')
+            setCommentBar('flex')
+        else
+            setCommentBar('none')
     }
 
     return (
@@ -126,18 +133,36 @@ const Card = (props) => {
                             <p>{data.likeCount}</p>
                         </div>
                         <div className='comments'>
-                            <BiSolidComment name='comment' onClick={handleComment} />
+                            <BiSolidComment name='comment' onClick={handleCommentBar} />
                             <p>{(data.comments).length}</p>
                         </div>
                     </div>
                 </div>
 
-                {/* <div className='comments'>
+                <div style={{ display: commentBar }} className='comments-cover'>
                     <form onSubmit={handleComment}>
                         <input type="text" onChange={handleCommentChange} value={comment} />
-                        <button type='submit'></button>
+                        <button type='submit'>Post</button>
                     </form>
-                </div> */}
+                    {((data.comments).map(element => {
+                        return (
+                            < div key={element.uniqueId} className='other-comments'>
+                                <div className='other-profile'>
+                                    <img src={(element.gender === 'male') ? '/assets/man.png' : '/assets/woman.png'} alt="" />
+                                </div>
+                                <div className='other-comment-text'>
+                                    <p>{element.username}</p>
+                                    <p>
+                                        {element.comment}
+                                    </p>
+                                </div>
+                            </div>
+                        )
+                    }))
+                    }
+
+                </div>
+
 
             </div>
 

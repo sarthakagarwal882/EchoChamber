@@ -47,7 +47,7 @@ async function postuser(data) {
         }
     }
     catch (err) {
-        console.log(err);
+        console.log('err');
     }
 }
 
@@ -60,7 +60,7 @@ async function getPosts() {
         return (data);
     }
     catch (err) {
-        console.log(err);
+        console.log('err');
     }
 }
 
@@ -105,6 +105,68 @@ async function likePost(message, res, action) {
 
             });
         }
+    }
+    catch (err) {
+        console.log('err');
+    }
+}
+
+async function getStats(message, res) {
+    try {
+        const db = client.db(dataBase);
+        const coll2 = db.collection(commonData);
+        const data = await coll2.findOne({ uniqueId: message.id })
+        res.json({ likes: data.likes, comments: data.comments })
+    }
+    catch (e) {
+        console.log('e');
+    }
+}
+
+async function commentPost(message, res) {
+    // console.log(message);
+    const uniqueId=generateUniqueId()
+    try {
+        const db = client.db(dataBase);
+        const coll1 = db.collection(userData);
+        const coll2 = db.collection(commonData);
+        let commentAll;
+        commentAll = await coll2.updateOne(
+            { uniqueId: message.id },
+            {
+                $push: {
+                    comments: {
+                        uniqueId:uniqueId,
+                        username: message.myUsername,
+                        gender: message.gender,
+                        comment: message.comment
+                    }
+                }
+            }
+        )
+        console.log(commentAll.acknowledged);
+
+
+        const collection1 = await coll1.findOne({ username: message.postUsername })
+        if (collection1 !== null) {
+            (collection1.posts).forEach(async (element, index) => {
+                if (element.uniqueId === message.id) {
+                    let checkUpdate = await coll1.updateOne({ username: message.postUsername }, {
+                        $push: {
+                            [`posts.${index}.comments`]: {
+                                uniqueId:uniqueId,
+                                username: message.myUsername,
+                                gender: message.gender,
+                                comment: message.comment
+                            }
+                        }
+                    })
+                    res.json(checkUpdate.acknowledged && commentAll.acknowledged)
+
+                }
+
+            });
+        }
 
     }
     catch (err) {
@@ -112,17 +174,6 @@ async function likePost(message, res, action) {
     }
 }
 
-async function getStats(message,res) {
-    try {
-        const db = client.db(dataBase);
-        const coll2 = db.collection(commonData);
-        const data = await coll2.findOne({ uniqueId: message.id })
-        res.json({likes:data.likes,comments:data.comments})
-    }
-    catch (e) {
-
-    }
-}
 
 function post(app) {
     app.post('/postData', async (req, res) => {
@@ -147,8 +198,11 @@ function post(app) {
     })
     app.post('/getstats', async (req, res) => {
         let message = req.body.data
-        // console.log(message);
-        getStats(message,res)
+        getStats(message, res)
+    })
+    app.post('/comment', (req, res) => {
+        let message = req.body.data
+        commentPost(message, res)
     })
 }
 
