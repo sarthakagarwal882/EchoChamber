@@ -57,7 +57,7 @@ const Post = () => {
     }
 
 
-    const listItems = ["All Posts", "Your Posts", "Other's Posts"];
+    const listItems = ["All Posts"];
 
     return (
         <div className='posts'>

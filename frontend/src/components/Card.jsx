@@ -33,15 +33,16 @@ const Card = (props) => {
 
 
 
+    useEffect(() => {
+        let checkLike = ((data.likes).filter(element => (element === user.username)))
 
-    // if ((data.likes).length > 0) {
-    //     let checkLike = ((data.likes).filter(element => (element === user.username)))
-    //     if (checkLike.length > 0)
-    //         setLiked('#0072E8')
-    //     else {
-    //         setLiked('#ffffff')
-    //     }
-    // }
+        if (checkLike.length > 0)
+            setLiked('#0072E8')
+        else {
+            setLiked('#ffffff')
+        }
+
+    }, [])
 
 
 
