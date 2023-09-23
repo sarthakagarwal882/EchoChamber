@@ -144,8 +144,6 @@ async function commentPost(message, res) {
                 }
             }
         )
-        console.log(commentAll.acknowledged);
-
 
         const collection1 = await coll1.findOne({ username: message.postUsername })
         if (collection1 !== null) {

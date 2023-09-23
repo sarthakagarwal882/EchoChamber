@@ -88,7 +88,11 @@ const Card = (props) => {
         e.preventDefault()
         if ('username' in user) {
             const commentCheck = await axios.post(backend_ref + '/comment', { data: { id: id, myUsername: user.username, postUsername: username, comment: comment, gender: user.gender } })
-            console.log(commentCheck);
+            const newLikes = await axios.post(backend_ref + '/getstats', { data: { id: data.id } })
+            setData((prevValue) => ({ ...prevValue, likes: newLikes.data.likes, comments: newLikes.data.comments, likeCount: (newLikes.data.likes).length }))
+            toast('Comment added Sucessfully!')
+            setComment('')
+            navigateTo('/')
         }
         else {
             toast('Login First!')
