@@ -130,6 +130,9 @@ function post(app) {
         const message = req.body.data
         likePost(message, res, 'unlike')
     })
+    app.get('/test',()=>{
+        res.json('Test Successful!')
+    })
 }
 
 module.exports = post;
