@@ -1,30 +1,60 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import './CreatePostStyles.css'
-import { BiImageAdd, BiArrowBack } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
+import { BiArrowBack } from 'react-icons/bi'
+import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
+import axios from "axios";
+import backend_ref from './BackendRef';
+
 const CreatePost = () => {
-    const [image, setImage] = useState(null)
-    const [imgFit, setImgFit] = useState('cover')
+    const user = useSelector((store) => store.user.data)
+    const navigateTo = useNavigate()
     const [postData, setPostData] = useState({
-        caption: '',
-        imageFit: imgFit,
-        location: ''
+        text: ''
     })
 
     const handleDataChange = (e) => {
+        let { name, value } = e.target
+        setPostData((prevValue) => {
+            return ({
+                ...prevValue,
+                [name]: value
+            })
+        })
+        console.log(postData);
     }
 
-    const handleImgChange = (e) => {
-        let reader = new FileReader()
-        reader.readAsDataURL(e.target.files[0])
-        reader.onload = () => {
-            let base64 = (reader.result);
-            setImage(base64)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (postData.text === '')
+            toast('Please enter text!');
+        else {
+            try {
+                let date = new Date().toLocaleString();
+                let data = {
+                    post: postData.text,
+                    username: user.username,
+                    date: date,
+                    gender:user.gender
+                }
+                let send = await axios.post(backend_ref + '/postData', { data })
+                if (send.data) {
+                    toast('Post Uploaded Successfuly')
+                    navigateTo('/'), 2000
+                }
+                else {
+                    toast('Post upload Failed. Try again Later!')
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+
         }
-    }
-
-    const handleImgFit = (e) => {
-        setImgFit(e.target.name);
     }
 
     return (
@@ -40,8 +70,17 @@ const CreatePost = () => {
                 </div>
                 <div className="createpost">
 
-
-                    <div className='createpost-img'>
+                    <div className='user-info'>
+                        <img src="/assets/man.png" alt="" />
+                        <p>ksdxnawk;ndkw;</p>
+                    </div>
+                    <div className='createpost-form'>
+                        <form onSubmit={handleSubmit}>
+                            <textarea name="text" placeholder='write post...' onChange={handleDataChange} value={postData.text} id="" cols="30" rows="10"></textarea>
+                            <button className='postdata' type='submit'>Post</button>
+                        </form>
+                    </div>
+                    {/* <div className='createpost-img'>
                         {(image) &&
                             <img src={image} alt="" style={{ objectFit: imgFit }} />
                         }
@@ -49,7 +88,7 @@ const CreatePost = () => {
                             <div className='input-file'>
                                 <BiImageAdd />
                                 <label htmlFor="file">Choose a Picture</label>
-                                <input id='file' className="file" type="file" onChange={handleImgChange} />
+                                <input id='file' name='image' className="file" type="file" onChange={handleImgChange} />
                             </div>
                         }
                     </div>
@@ -59,7 +98,7 @@ const CreatePost = () => {
                             <img src="/assets/man.png" alt="" />
                             <p>ksdxnawk;ndkw;</p>
                         </div>
-                        <textarea value={postData.caption} onChange={handleDataChange} name="" id="" cols="30" rows="10" placeholder='Write a caption ...'></textarea>
+                        <textarea value={postData.caption} onChange={handleDataChange} name="caption" id="" cols="30" rows="7" placeholder='Write a caption ...'></textarea>
                         <div className='img-fit'>
                             <p>Choose Image Fit</p>
                             <div className='img-fit-buttons'>
@@ -68,10 +107,22 @@ const CreatePost = () => {
                             </div>
                         </div>
                         <div className='create-post-location'>
-                            <input type="text" placeholder='Add location' />
+                            <input name='location' onChange={handleDataChange} type="text" value={postData.location} placeholder='Add location' />
                         </div>
-                    </div>
-
+                        <span className='postdata' onClick={submitData}>Post</span>
+                    </div> */}
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={3000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
 
                 </div>
             </div>

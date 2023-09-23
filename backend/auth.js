@@ -22,6 +22,7 @@ async function insertData(data) {
     let insertCred = await coll1.insertOne(data)
     let insertData =await coll2.insertOne(userSchema)
     if ((insertCred.acknowledged) && (insertData.acknowledged)) {
+      console.log(insertCred.acknowledged,insertData.acknowledged);
       return (insertCred.insertedId);
     }
     else {

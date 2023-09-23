@@ -13,7 +13,6 @@ const HomeRoute = () => {
 
     const checkCookiedata = async (data) => {
         let check = await axios.post(backend_ref + '/verify', data)
-        console.log(check);
         if (check.data === undefined)
             null
         else
@@ -27,6 +26,7 @@ const HomeRoute = () => {
         <>
             <Navbar />
             <Home/>
+            
             <Outlet />
         </>
     )

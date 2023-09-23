@@ -8,14 +8,18 @@ const { default: axios } = require('axios');
 
 //js files
 const auth = require('./auth');
+const post = require('./posts');
 
 //Code.
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:5173','https://main--ech0chamber.netlify.app','https://ech0chamber.netlify.app'] // Replace with your frontend's origin
+  origin: ['http://localhost:5173', 'https://main--ech0chamber.netlify.app', 'https://ech0chamber.netlify.app'] // Replace with your frontend's origin
 }));
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.text({ limit: '200mb' }));
+
+
 let port = process.env.PORT
 app.listen(8000 || port);
 
@@ -24,6 +28,7 @@ const client = new MongoClient(uri);
 client.connect();
 
 auth(app);
+post(app);
 
 function pingLink() {
   const linkToPing = 'https://filmyradar-backend.onrender.com/movie/top_rated'; // Replace with the link you want to ping
@@ -34,3 +39,4 @@ function pingLink() {
 // Ping the link every 10 minutes (10 minutes = 600,000 milliseconds)
 const pingInterval = 10 * 60 * 1000;
 setInterval(pingLink, pingInterval);
+

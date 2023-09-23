@@ -1,5 +1,4 @@
 import './SignUpStyles.css'
-// import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import Spinner from '../Spinner/Spinner';
@@ -56,9 +55,10 @@ const SignUp = () => {
 
     async function sendData() {
         const check = await axios.post(backend_ref + "/register", { formData });
-        if (check.data.data) {
+        console.log(check);
+        if (check.data.cookieData) {
             Cookies.set('echoChamberCred', JSON.stringify({ token: check.data.token }), { expires: 30 })
-            dispatch(login(check.data))
+            dispatch(login(check.data.cookieData))
             navigateTo('/');
         }
         else if (check.data === false) {

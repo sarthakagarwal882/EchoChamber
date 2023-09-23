@@ -2,11 +2,13 @@ import './PostStyles.css'
 import { useState } from "react"
 import { IoMdArrowDropdown } from 'react-icons/io'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
 
 const Post = () => {
+    const user = useSelector((store) => store.user.data)
     const allPosts = useSelector((store) => store.posts.data)
-    console.log(allPosts);
+    const navigateTo = useNavigate()
     const [liClicked, setLiClicked] = useState(0)
     const [dropDown, setDropdown] = useState(false)
     const [viewport, setViewport] = useState((window.innerWidth <= 1000) ? false : true)
@@ -44,6 +46,17 @@ const Post = () => {
 
     window.addEventListener('resize', handleViewport)
 
+    const handleCreatePost = () => {
+        if ('username' in user)
+            navigateTo('/create')
+        else {
+            toast('Login first!')
+            navigateTo('/login')
+        }
+
+    }
+
+
     const listItems = ["All Posts", "Your Posts", "Other's Posts"];
 
     return (
@@ -74,27 +87,29 @@ const Post = () => {
                     </ul>
                 </div>
                 {(viewport) ?
-                    <div className='create-post'>
-                        <span role='button' onClick={handleClickDrop} className={dropDown ? 'clicked span-1' : 'span-1'}>Create a Post <IoMdArrowDropdown /></span>
-                        <ul style={{display:dropDown?'flex':'none'}}>
-                            <Link onClick={handleClickDrop}>
-                                <li>Image</li>
-                            </Link>
-                            <hr />
-                            <Link onClick={handleClickDrop}>
-                                <li>Text</li>
-                            </Link>
-                        </ul>
-                    </div> : null
+                    <div className='create-post' onClick={handleCreatePost}>
+                        <span role='button' onClick={handleClickDrop} className={dropDown ? 'clicked span-1' : 'span-1'}>Create a Post</span>
+                    </div>
+                    : null
                 }
             </div>
             {(viewport) ?
-                <hr className='posts-hr'/> :
-                <Link to={'/login'}>
-                    <span className='write-post-mob' />
-                </Link>
-            }
+                <hr className='posts-hr' /> :
 
+                <span onClick={handleCreatePost} className='write-post-mob' />
+            }
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div >
     )
 }
