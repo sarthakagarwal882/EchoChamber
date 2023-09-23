@@ -162,6 +162,7 @@
     font-size: 1rem;
     cursor: pointer;
     font-weight: 600;
+    border: none;
 }
 
 .nav-login-link button:hover {
@@ -184,6 +185,7 @@
     flex-direction: column;
     align-items: end;
     overflow: hidden;
+    z-index: 10;
 }
 
 

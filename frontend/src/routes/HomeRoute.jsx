@@ -1,9 +1,10 @@
 import { Outlet } from "react-router"
 import Navbar from "../components/Navbar"
+import backend_ref from "../components/BackendRef"
+import Home from "../components/Home"
 import Cookies from "js-cookie"
 import { useDispatch } from "react-redux"
 import axios from "axios"
-import backend_ref from "../components/BackendRef"
 import { login } from "../Store/slice/userSlice"
 
 const HomeRoute = () => {
@@ -25,6 +26,7 @@ const HomeRoute = () => {
     return (
         <>
             <Navbar />
+            <Home/>
             <Outlet />
         </>
     )

@@ -1,14 +1,17 @@
 import './PostStyles.css'
 import { useState } from "react"
 import { IoMdArrowDropdown } from 'react-icons/io'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Post = () => {
+    const allPosts = useSelector((store) => store.posts.data)
+    console.log(allPosts);
     const [liClicked, setLiClicked] = useState(0)
     const [dropDown, setDropdown] = useState(false)
     const [viewport, setViewport] = useState((window.innerWidth <= 1000) ? false : true)
     const [isOpen, setIsOpen] = useState(null);
-    const [liFilter, setLiFilter] = useState('All')
+    const [liFilter, setLiFilter] = useState('All Posts')
 
 
     const handleLiClick = (index, filter) => {
@@ -41,20 +44,20 @@ const Post = () => {
 
     window.addEventListener('resize', handleViewport)
 
-    const listItems = [viewport ? 'All Posts(32)' : 'All', 'Article', 'Event', 'Education', 'job'];
+    const listItems = ["All Posts", "Your Posts", "Other's Posts"];
 
     return (
         <div className='posts'>
             <div className='posts-child'>
                 {viewport ? null :
                     <div className='post-368'>
-                        <p>Posts(368)</p>
+                        <p>Posts: {allPosts.length}</p>
                     </div>
                 }
                 <div className='ul-div-wrapper'>
                     {
                         viewport ? null :
-                            <button className="dropbtn" onClick={toggleDropdown}>Filter: {liFilter}<IoMdArrowDropdown className={isOpen&&'rotate-180'} /></button>
+                            <button className="dropbtn" onClick={toggleDropdown}>Filter: {liFilter}<IoMdArrowDropdown className={isOpen && 'rotate-180'} /></button>
                     }
                     <ul className={(isOpen && !viewport) ? "toggle" : null}>
                         {listItems.map((item, index) => (
@@ -71,16 +74,24 @@ const Post = () => {
                     </ul>
                 </div>
                 {(viewport) ?
-                    <div>
-                        <span onClick={handleClickDrop} className={dropDown ? 'clicked span-1' : 'span-1'}>Write a Post <IoMdArrowDropdown /></span>
-                        <span className='span-2'><span className='join-group' />Join Group</span>
+                    <div className='create-post'>
+                        <span role='button' onClick={handleClickDrop} className={dropDown ? 'clicked span-1' : 'span-1'}>Create a Post <IoMdArrowDropdown /></span>
+                        <ul style={{display:dropDown?'flex':'none'}}>
+                            <Link onClick={handleClickDrop}>
+                                <li>Image</li>
+                            </Link>
+                            <hr />
+                            <Link onClick={handleClickDrop}>
+                                <li>Text</li>
+                            </Link>
+                        </ul>
                     </div> : null
                 }
             </div>
             {(viewport) ?
-                <hr /> :
+                <hr className='posts-hr'/> :
                 <Link to={'/login'}>
-                <span className='write-post-mob' />
+                    <span className='write-post-mob' />
                 </Link>
             }
 

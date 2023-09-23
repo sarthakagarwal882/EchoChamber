@@ -1,5 +1,5 @@
 .posts {
-    padding: 0 16%;
+    padding: 0 10%;
     margin: 4rem 0 0 0;
 }
 
@@ -14,20 +14,19 @@
 .posts-child ul {
     display: flex;
     flex-direction: row;
-    width: 30%;
+    width: 50%;
 }
 
 .ul-div-wrapper {
     display: flex;
     justify-content: space-between;
-    width: 100%;
 }
 
 .posts-child ul li {
     position: relative;
     width: 150%;
     list-style: none;
-    margin: 0 3%;
+    margin: 0 10%;
     text-wrap: nowrap;
     color: #8a8a8a;
     cursor: pointer;
@@ -41,18 +40,19 @@
 }
 
 .txt-li-b {
-    font-weight: 500;
-    color: #000000 !important;
+    font-weight: 600;
+    color: #ffffff !important;
 }
 
 .post-li-hr {
     position: absolute;
-    bottom: -12px;
+    bottom: -12.5px;
     left: 50%;
     width: 0;
-    height: 2px;
-    background-color: #000;
+    height: 3px;
+    background-color: #e58014;
     transition: width 0.5s ease-in-out, left 0.5s ease-in-out;
+    border: none;
 }
 
 .txt-li-b .post-li-hr {
@@ -74,12 +74,13 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 9rem;
+    width: 10rem;
     height: 2.4rem;
     border-radius: 4px;
-    background-color: #EDEEF0;
+    background-color: #e58014;
     font-weight: 500;
     cursor: pointer;
+    color: #fff;
 }
 
 .posts-child div .span-1 svg {
@@ -88,29 +89,7 @@
     transition: 0.1s ease-in-out;
 }
 
-.posts-child div .span-2 {
-    background-color: #2F6CE5;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
-    font-weight: 500;
-    width: 9rem;
-    border-radius: 4px;
-    margin: 0 0 0 1rem !important;
-    cursor: pointer;
-}
-
-.posts-child div .span-2 .join-group {
-    background: url('/assets/join-group.svg') no-repeat;
-    width: 22px;
-    height: 13px;
-    margin: 0 10px 0 0 !important;
-    transform: scale(1.2);
-}
-
-.posts hr {
+.posts-hr {
     margin: 0.6rem 0 0;
     height: 3px;
     border: none;
@@ -130,8 +109,50 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width:1400px)
-{
+.create-post {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.create-post ul {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 3rem;
+    right: 0;
+    background-color: #dadada;
+}
+
+.create-post ul a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 100%;
+    background-color: #363636;
+    text-decoration: none;
+}
+.create-post ul li{
+    color: #ffffff;
+
+}
+
+.create-post ul a:hover {
+    background-color: #8a8a8a;
+}
+
+.create-post ul hr{
+    margin: 0;
+    height: 1px;
+    border-color: #2F6CE5;
+    z-index: 5;
+}
+
+@media only screen and (max-width:1400px) {
     .posts {
         padding: 0 8%;
         margin: 4rem 0 0 0;
@@ -144,31 +165,35 @@
         margin: 1.5rem 0 0 0;
     }
 
+    .ul-div-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column !important;
+    }
 
     .posts-child ul {
         display: none;
         flex-direction: column;
         position: absolute;
-        right: 3%;
+        right: 0%;
         top: 2.2rem;
         z-index: -2;
         transform: translate(0px, 0px);
         width: 100%;
+        border-radius: 4px;
+        background-color: #363636;
+        padding: 4px 0;
     }
 
     .toggle {
         display: flex !important;
+        flex-direction: column;
+        align-items: center;
         z-index: 2 !important;
+
     }
 
-    .ul-div-wrapper {
-        position: relative;
-        width: 30%;
-        display: flex;
-        flex-direction: column !important;
-    }
-
-    .rotate-180{
+    .rotate-180 {
         transform: rotate(180deg);
     }
 
@@ -178,7 +203,7 @@
         padding: 0 10px;
         height: 2.2rem;
         border-radius: 4px;
-        font-weight: 500;
+        font-weight: 600;
         color: #212529;
         display: flex;
         justify-content: center;
@@ -197,8 +222,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-weight: 700;
-        color: #212529;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 1.1rem;
     }
 
     .posts-child ul li {
@@ -208,12 +234,15 @@
         list-style: none;
         margin: 0 3%;
         text-wrap: nowrap;
-        color: #8a8a8a;
+        color: #ffffff;
         cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #F1F3F5;
+    }
+
+    .posts-child ul li:hover {
+        background-color: #8a8a8a;
     }
 
     .posts-child ul li:first-child {
@@ -229,19 +258,20 @@
         padding: 0 12%;
         margin: 1.5rem 0 0 0;
     }
+
     .ul-div-wrapper {
         position: relative;
-        width: 40%;
         display: flex;
         flex-direction: column !important;
     }
+
     .ul-div-wrapper button {
         background-color: #F1F3F5;
         border: none;
         padding: 0 8px;
         height: 2.2rem;
         border-radius: 4px;
-        font-weight: 500;
+        font-weight: 600;
         color: #212529;
         display: flex;
         justify-content: center;
