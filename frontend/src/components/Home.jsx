@@ -4,12 +4,16 @@ import Card from "./Card"
 import axios from 'axios'
 import backend_ref from './BackendRef'
 import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { addData } from "../Store/slice/AllPostSlice"
 const Home = () => {
+    const dispatch=useDispatch()
     const [posts, setPosts] = useState([])
     useEffect(() => {
 
         const getPosts = async () => {
             const data = await axios.get(backend_ref + '/getData');
+            dispatch(addData(data.data))
             setPosts(data.data);
         }
         getPosts()
