@@ -222,7 +222,23 @@ async function getMyInfo(message, res) {
         const coll1 = db.collection(userData);
         const data = await coll.findOne({ username: message.username })
         const data1 = await coll1.findOne({ username: message.username })
-        res.json({ username: data.username, gender: data.gender, name: data.name, posts: data1.posts, email: data.email })
+        let posts = (data1.posts).map(element => {
+            let likeCount = (element.likes).length
+            let commentCount = (element.comments).length
+            let liked = (element.likes).filter(element=>(element===message.username))
+            if (liked.length > 0)
+                liked = true
+            else
+                liked = false
+            return ({
+                ...element,
+                likeCount: (element.likes).length,
+                commentCount: (element.comments).length,
+                liked: liked,
+
+            })
+        })
+        res.json({ username: data.username, gender: data.gender, name: data.name, email: data.email, posts: posts })
 
     } catch (error) {
         console.log(error);

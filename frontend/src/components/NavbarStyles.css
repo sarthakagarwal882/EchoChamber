@@ -18,6 +18,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 .nav-title h1 {

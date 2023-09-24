@@ -55,13 +55,12 @@ const Home = () => {
     
 
 
-
     return (
         <div className="home">
             <Post />
             <>
                 {(posts.length > 0 ) &&
-                    (posts).reverse().map((item) => { return (<Card key={item._id} id={item.uniqueId} username={item.username} post={item.post} likes={item.likes} date={item.date} gender={item.gender} comments={item.comments} commentCount={item.commentCount} likeCount={item.likeCount} liked={item.liked} />) })
+                    (posts).map((item) => { return (<Card key={item._id} id={item.uniqueId} username={item.username} post={item.post} likes={item.likes} date={item.date} gender={item.gender} comments={item.comments} commentCount={item.commentCount} likeCount={item.likeCount} liked={item.liked} />) })
                 }
             </>
         </div>

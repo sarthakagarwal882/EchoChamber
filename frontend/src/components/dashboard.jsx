@@ -49,12 +49,9 @@ const Dashboard = () => {
     }
     getdata()
 
-
     return (
         <div className='dashboard'>
-            <Link to={'/'}>
-            <button className='dash-home-btn'>Homepage</button>
-            </Link>
+
             <div className='user-profile'>
                 <img src={(data.gender === 'male') ? '/assets/man.png' : '/assets/woman.png'} alt="" />
                 <div className='user-information'>
@@ -76,10 +73,11 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            <hr />
             <h1>Posts</h1>
             <div className='user-posts'>
                 {
-                    (data.posts).map(element=>(<Card key={element.uniqueId} date={element.date} post={element.post} gender={element.gender} id={element.uniqueId} username={element.userame} likes={element.likes} comments={element.comments} />))
+                    (data.posts).map(element=>(<Card key={element.uniqueId} date={element.date} post={element.post} gender={element.gender} id={element.uniqueId} username={userState.username} likes={element.likes} comments={element.comments} commentCount={element.commentCount} likeCount={element.likeCount} displayPower={'true'}/>))
                 }
             </div>
 

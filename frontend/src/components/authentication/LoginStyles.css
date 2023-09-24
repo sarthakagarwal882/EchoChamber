@@ -96,6 +96,8 @@
     color: #ffffff;
     font-size: 1.2rem;
     height: 2rem;
+    caret-color: #ffffff;
+    cursor: text;
 }
 
 .login input:focus {

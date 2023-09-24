@@ -5,12 +5,12 @@ import Login from './components/authentication/Login'
 import HomeRoute from './routes/HomeRoute'
 import CreatePostRoute from './routes/CreatePostRoute'
 import ForgotPassRoute from './routes/ForgotPassRoute'
-import Dashboard from './components/dashboard'
+import DashboardRoute from './routes/DashboardRoute'
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/dashboard' element={<DashboardRoute />} />
         <Route path='/create' element={<CreatePostRoute />} />
         <Route path='/' element={<HomeRoute />}>
           <Route path='/login' element={<Login />} />
