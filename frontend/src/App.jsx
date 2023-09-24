@@ -12,11 +12,10 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/' element={<HomeRoute />}>
-          <Route path='/create' element={<CreatePostRoute />} />
-        </Route>
-        <Route path='/forgot_password' element={<ForgotPassRoute/>}/>
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/create' element={<CreatePostRoute />} />
+        <Route path='/' element={<HomeRoute />} />
+        <Route path='/forgot_password' element={<ForgotPassRoute />} />
       </Routes>
     </BrowserRouter>
   )
