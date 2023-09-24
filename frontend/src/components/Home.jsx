@@ -9,8 +9,9 @@ import { useDispatch } from "react-redux"
 import { addData } from "../Store/slice/AllPostSlice"
 import Cookies from "js-cookie"
 import { login } from "../Store/slice/userSlice"
+import { useLocation } from "react-router"
 const Home = () => {
-
+    const location = useLocation()
     const credentials = ((Cookies.get('echoChamberCred')))
     const dispatch = useDispatch()
     const [posts, setPosts] = useState([])
@@ -39,7 +40,7 @@ const Home = () => {
             }
         }
         getPosts()
-    }, [])
+    }, [location.pathname])
     
     
     useEffect(()=>{
