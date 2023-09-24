@@ -17,7 +17,6 @@ const Navbar = () => {
     const [viewport, setViewport] = useState(window.innerWidth <= 900 ? null : true)
 
     const handleViewport = () => {
-        console.log(viewport);
         if ((window.innerWidth) <= 900)
             setViewport(null)
         else

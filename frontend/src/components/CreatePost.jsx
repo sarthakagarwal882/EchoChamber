@@ -39,7 +39,7 @@ const CreatePost = () => {
                     post: postData.text,
                     username: user.username,
                     date: date,
-                    gender:user.gender
+                    gender: user.gender
                 }
                 let send = await axios.post(backend_ref + '/postData', { data })
                 if (send.data) {
@@ -80,37 +80,7 @@ const CreatePost = () => {
                             <button className='postdata' type='submit'>Post</button>
                         </form>
                     </div>
-                    {/* <div className='createpost-img'>
-                        {(image) &&
-                            <img src={image} alt="" style={{ objectFit: imgFit }} />
-                        }
-                        {(!image) &&
-                            <div className='input-file'>
-                                <BiImageAdd />
-                                <label htmlFor="file">Choose a Picture</label>
-                                <input id='file' name='image' className="file" type="file" onChange={handleImgChange} />
-                            </div>
-                        }
-                    </div>
 
-                    <div className='createpost-post-info'>
-                        <div className='user-info'>
-                            <img src="/assets/man.png" alt="" />
-                            <p>ksdxnawk;ndkw;</p>
-                        </div>
-                        <textarea value={postData.caption} onChange={handleDataChange} name="caption" id="" cols="30" rows="7" placeholder='Write a caption ...'></textarea>
-                        <div className='img-fit'>
-                            <p>Choose Image Fit</p>
-                            <div className='img-fit-buttons'>
-                                <button name='cover' onClick={handleImgFit} className={(imgFit === 'cover') ? 'btn-selected' : ''}>Cover</button>
-                                <button name='contain' onClick={handleImgFit} className={(imgFit === 'contain') ? 'btn-selected' : ''}>Contain</button>
-                            </div>
-                        </div>
-                        <div className='create-post-location'>
-                            <input name='location' onChange={handleDataChange} type="text" value={postData.location} placeholder='Add location' />
-                        </div>
-                        <span className='postdata' onClick={submitData}>Post</span>
-                    </div> */}
                     <ToastContainer
                         position="top-right"
                         autoClose={3000}

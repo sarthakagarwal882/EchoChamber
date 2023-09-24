@@ -12,7 +12,7 @@
 }
 
 .createpost-cover {
-    width: 27%;
+    width: 30%;
     height: 60%;
     display: flex;
     flex-direction: column;
@@ -82,11 +82,11 @@
     align-items: center;
 }
 .createpost-form form textarea{
+    border:none;
     text-align: center;
     resize: none;
     width: 100%;
     background-color: transparent;
-    border: none;
     color: #ffffff;
     font-size: 1.1rem;
     overflow: hidden;
@@ -102,15 +102,16 @@
 
 .user-info{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    width: 50%;
 }
 .user-info img{
     width: 35px;
+    margin: 0 10px 0 0;
 }
 .user-info p{
     color: #d0d0d0;
+    margin: 0 0 0 10px;
 }
 
 .postdata {
@@ -135,162 +136,10 @@
 }
 
 
-/* 
-.createpost-img {
-    display: flex;
-    justify-content: center;
-    width: 60%;
-    height: 100%;
-    border-right: 1px solid gray;
-}
-
-.createpost-img img {
-    width: 100%;
-    height: 100%;
-    border-bottom-left-radius: 10px;
-}
-
-.file {
-    display: none;
-}
-
-.input-file {
-    padding: 8rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.input-file svg {
-    color: #fff;
-    font-size: 4rem;
-}
-
-.input-file label {
-    color: #ffffff;
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    background-color: #0095f6;
-    cursor: pointer;
-}
-
-
-.createpost-post-info {
-    height: 100%;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 0 0 0 2%;
-}
-
-.user-info {
-    width: 70%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.user-info p {
-    letter-spacing: 1px;
-    font-size: 1rem;
-    color: #ffffff;
-}
-
-.user-info img {
-    width: 25px;
-    height: 25px;
-}
-
-.createpost-post-info textarea {
-    background-color: transparent;
-    resize: none;
-    font-size: 1.1rem;
-    font-weight: 300;
-    border-color: transparent;
-    border-radius: 4px;
-    color: #ffffff;
-}
-
-.createpost-post-info textarea::placeholder {
-    font-size: 1rem;
-    font-weight: 300;
-}
-
-.createpost-post-info textarea:focus {
-    outline: none;
-}
-
-.img-fit {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-.img-fit p {
-    color: #fff;
-
-}
-
-.img-fit-buttons {
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 0.5rem 0 0 0;
-}
-
-.img-fit-buttons button {
-    padding: 0.3rem 1rem;
-    width: 40%;
-    height: 2.2rem;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-selected {
-    background-color: #e58014;
-}
-
-.create-post-location {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.3rem 0.5rem;
-    border: 1px solid #818181;
-    border-radius: 8px;
-    margin: 0 1rem 0 0;
-}
-
-.create-post-location input {
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    height: 1.5rem;
-    color: #fff;
-}
-
-.create-post-location input ::placeholder {
-    font-size: 1.1rem;
-    color: #b1b1b1;
-    font-weight: 500;
-}
-
-.create-post-location input:focus {
-    outline: none;
-} */
 
 @media only screen and (max-width:1200px) {
     .createpost-cover {
-        width: 27%;
+        width: 35%;
         height: 60%;
         display: flex;
         flex-direction: column;
@@ -328,7 +177,7 @@
     .createpost-header div {
         display: flex;
         justify-content: center;
-        width: 94%;
+        width: 90%;
     }
     
     .createpost-header div p {
@@ -343,7 +192,7 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        height: 93%;
+        height: 92%;
         background-color: #242424;
         border-top: 1px solid #818181;
         border-bottom-left-radius: 10px;
@@ -351,7 +200,7 @@
         padding: 10% 0 5% 0;
     }
     .createpost-form{
-        margin: 2rem 0 0 0;
+        margin: 1rem 0 0 0;
         width: 80%;
     }
     .createpost .createpost-form form{
@@ -363,10 +212,12 @@
         resize: none;
         width: 100%;
         background-color: transparent;
-        border: none;
         color: #ffffff;
         font-size: 1.1rem;
         overflow: hidden;
+        height: 11rem;
+        border: none;
+
     }
     .createpost-form form textarea:focus{
         outline: none;
@@ -379,15 +230,17 @@
     
     .user-info{
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
-        width: 80%;
+        width: 40%;
     }
     .user-info img{
         width: 35px;
+        margin: 0 10px 0 0;
     }
     .user-info p{
         color: #d0d0d0;
+        margin: 0 0 0 10px;
     }
     
     .postdata {
@@ -413,48 +266,7 @@
 }
 
 @media only screen and (max-width:1000px) {
-    /* .createpost-post-info {
-        height: 50%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        padding: 2% 0 0 2%;
-        border-top: 1px solid #818181;
-    }
-
-    .createpost-post-info textarea {
-        background-color: transparent;
-        resize: none;
-        font-size: 1.1rem;
-        font-weight: 300;
-        border-color: transparent;
-        border-radius: 4px;
-        color: #ffffff;
-        text-align: center;
-        margin: 1rem 0 0 0;
-    }
-
-    .createpost-post-info textarea:focus {
-        border: 1px solid #b1b1b1;
-    } */
-
-    /* .createpost-img {
-        display: flex;
-        justify-content: center;
-        width: 80%;
-        height: 40%;
-        border-right: none;
-    }
-
-    .user-info {
-        width: 60%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin: auto;
-    } */
+   
 
     .createpost {
         display: flex;
@@ -480,66 +292,6 @@
         border-radius: 10px;
     }
 
-    /* .img-fit {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        margin: 1rem 0;
-    }
-
-
-    .img-fit-buttons {
-        width: 80%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 0.5rem 0 0 0;
-    }
-
-    .img-fit-buttons button {
-        padding: 0.2rem 1rem;
-        width: 40%;
-        height: 2rem;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        font-weight: 600;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .create-post-location {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0.3rem 0.4rem;
-        border: 1px solid #818181;
-        border-radius: 8px;
-        margin: 0 1rem 0 0;
-    } */
-
-    /* .create-post-location input {
-        width: 100%;
-        background-color: transparent;
-        border: none;
-        height: 1.3rem;
-        color: #fff;
-    } */
-
-    /* .postdata {
-        width: 6rem;
-        height: 3rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #ffffff;
-        border-radius: 8px;
-        cursor: pointer;
-        margin: 1rem auto -1rem ;
-    } */
 
 }
 @media only screen and (max-width:800px) {
@@ -571,7 +323,7 @@
         padding: 10% 0 5% 0;
     }
     .createpost-cover {
-        width: 67%;
+        width: 70%;
         height: 60%;
         display: flex;
         flex-direction: column;
@@ -583,7 +335,7 @@
 }
 @media only screen and (max-width:500px) {
     .createpost-cover {
-        width: 70%;
+        width: 80%;
         height: 60%;
         display: flex;
         flex-direction: column;
@@ -592,4 +344,121 @@
         background-color: #242424;
         border-radius: 10px;
     }
+
+    
+.createpost-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 2%;
+}
+
+.createpost-header a {
+    text-decoration: none;
+    color: #ffffff;
+    width: 2%;
+    padding: 4px 0 0 0;
+}
+
+.createpost-header svg {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ffffff;
+    transition: 0.1s ease;
+}
+
+.createpost-header svg:hover {
+    transform: scale(1);
+}
+
+.createpost-header div {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+
+.createpost-header div p {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    padding: 0 4% 0 0;
+}
+
+.createpost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    background-color: #242424;
+    border-top: 1px solid #818181;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10% 0 5% 0;
+}
+.createpost-form{
+    margin: 1rem 0 0 0;
+    width: 80%;
+}
+.createpost .createpost-form form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.createpost-form form textarea{
+    text-align: center;
+    resize: none;
+    width: 100%;
+    height: 10rem;
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1rem;
+    overflow: hidden;
+    border-top: 1px solid #818181;
+    padding: 10px 0 10px 0;
+    font-weight: 300;
+}
+.createpost-form form textarea:focus{
+    outline: none;
+}
+
+.createpost-form form textarea::placeholder{
+    font-size: 1rem;
+}
+.user-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-info img{
+    width: 35px;
+    margin: 0 10px 0 0;
+}
+.user-info p{
+    color: #d0d0d0;
+    margin: 0 0 0 10px;
+}
+
+.postdata {
+    width: 7rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 2rem 0 0 0;
+    border: none;
+    font-weight: 600;
+}
+
+.postdata:hover {
+    background-color: #e58014;
+    color: #ffffff;
+}
+
 }
