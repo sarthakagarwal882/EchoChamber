@@ -49,9 +49,6 @@ const Dashboard = () => {
     }
     getdata()
 
-    console.log(data.posts);
-
-
 
     return (
         <div className='dashboard'>
