@@ -126,7 +126,7 @@ const SignUp = () => {
                 <img className='signup-close' src="/assets/close.svg" alt="" />
                 </Link>
                 <div className='signup'>
-                    <h1>Echo Chamber</h1>
+                    <h1>Create a new Account</h1>
                     <form onSubmit={handleSubmit}>
                             <div className='i-signup-div'>
                                 <input onChange={handleChange} name="name" type="text" placeholder="Name" value={formData.fname} required />
