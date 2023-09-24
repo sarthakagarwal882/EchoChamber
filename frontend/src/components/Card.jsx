@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
 import { AiFillLike } from 'react-icons/ai'
@@ -74,7 +75,7 @@ const Card = (props) => {
         if ('username' in user) {
             const commentCheck = await axios.post(backend_ref + '/comment', { data: { id: id, myUsername: user.username, postUsername: username, comment: comment, gender: user.gender } })
             const newLikes = await axios.post(backend_ref + '/getstats', { data: { id: data.id } })
-            setData((prevValue) => ({ ...prevValue, likes: newLikes.data.likes, comments: newLikes.data.comments, likeCount: (newLikes.data.likes).length }))
+            setData((prevValue) => ({ ...prevValue, likes: newLikes.data.likes, comments: newLikes.data.comments, likeCount: newLikes.data.likeCount, commentCount:newLikes.data.commentCount, liked:newLikes.data.liked }))
             toast('Comment added Sucessfully!')
             setComment('')
             navigateTo('/')

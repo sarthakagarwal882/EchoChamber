@@ -44,7 +44,6 @@ const Home = () => {
     
     useEffect(()=>{
         const getData=async ()=>{
-            // console.log(userData.username);
             const data = await axios.post(backend_ref + '/getData', { data: { username: userData.username } });
             dispatch(addData(data.data))
             setPosts(data.data);
@@ -52,7 +51,6 @@ const Home = () => {
         getData()
     },[userData])
     
-    // console.log(posts);
 
 
 
@@ -60,7 +58,7 @@ const Home = () => {
         <div className="home">
             <Post />
             <>
-                {(posts.length > 0 && (userData.username!=='')) &&
+                {(posts.length > 0 ) &&
                     (posts).map((item) => { return (<Card key={item._id} id={item.uniqueId} username={item.username} post={item.post} likes={item.likes} date={item.date} gender={item.gender} comments={item.comments} commentCount={item.commentCount} likeCount={item.likeCount} liked={item.liked} />) })
                 }
             </>
