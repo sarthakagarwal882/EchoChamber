@@ -64,7 +64,7 @@ const Login = () => {
                 </Link>
 
                 <div className="login">
-                    <h1>Echo Chamber</h1>
+                    <h1>Login to continue</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="login-form-div">
                             <input onChange={handleChange} name="username" type="text" value={credentials.username} placeholder="User Name" />
@@ -76,7 +76,7 @@ const Login = () => {
                             <>
                                 <button className="btn-login" type="submit">Login
                                 </button>
-                                <Link className="forgot-pass-link" to={'/forgot_password'} >
+                                <Link className="forgot-pass-link" to={'/forgot_password'} > 
                                     <p className="forgot-pass">Forgot Password?</p>
                                 </Link>
                             </>

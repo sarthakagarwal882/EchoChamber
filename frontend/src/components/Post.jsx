@@ -67,7 +67,7 @@ const Post = () => {
                         <p>Posts: {allPosts.length}</p>
                     </div>
                 }
-                <div className='ul-div-wrapper'>
+                {/* <div className='ul-div-wrapper'>
                     {
                         viewport ? null :
                             <button className="dropbtn" onClick={toggleDropdown}>Filter: {liFilter}<IoMdArrowDropdown className={isOpen && 'rotate-180'} /></button>
@@ -85,7 +85,7 @@ const Post = () => {
                             </li>
                         ))}
                     </ul>
-                </div>
+                </div> */}
                 {(viewport) ?
                     <div className='create-post' onClick={handleCreatePost}>
                         <span role='button' onClick={handleClickDrop} className={dropDown ? 'clicked span-1' : 'span-1'}>Create a Post</span>
