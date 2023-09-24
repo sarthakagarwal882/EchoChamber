@@ -13,14 +13,14 @@ const Home = () => {
             setPosts(data.data);
         }
         getPosts()
-    }  , [])
+    }, [])
 
     return (
         <div className="home">
             <Post />
             <>
                 {(posts.length > 0) &&
-                    (posts).map((item) => {return (<Card key={item._id} id={item.uniqueId} username={item.username} post={item.post} likes={item.likes} date={item.date} gender={item.gender} comments={item.comments} />) })
+                    (posts).map((item) => { return (<Card key={item._id} id={item.uniqueId} username={item.username} post={item.post} likes={item.likes} date={item.date} gender={item.gender} comments={item.comments} />) })
                 }
             </>
         </div>

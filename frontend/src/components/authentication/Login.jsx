@@ -19,7 +19,6 @@ const Login = () => {
     });
 
 
-
     const handleChange = (event) => {
         let { name, value } = event.target;
         setCredentials((prevValue) => {
@@ -61,7 +60,7 @@ const Login = () => {
         <div className="wrapper-login">
             <div className="login-cover">
                 <Link to={'/'}>
-                <img className="login-close" src="/assets/close.svg" alt="" />
+                    <img className="login-close" src="/assets/close.svg" alt="" />
                 </Link>
 
                 <div className="login">
@@ -77,7 +76,7 @@ const Login = () => {
                             <>
                                 <button className="btn-login" type="submit">Login
                                 </button>
-                                <Link className="forgot-pass-link" to={'/forgot_password'}>
+                                <Link className="forgot-pass-link" to={'/forgot_password'} >
                                     <p className="forgot-pass">Forgot Password?</p>
                                 </Link>
                             </>

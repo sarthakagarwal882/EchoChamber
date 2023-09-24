@@ -4,6 +4,23 @@ const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 const url = process.env.MONGO_URL;
 const client = new MongoClient(url);
+const speakeasy = require("speakeasy");
+const nodemailer = require("nodemailer");
+
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  tls: {
+    ciphers: 'SSLv3'
+  },
+  auth: {
+    user: process.env.GMAIL_ID,
+    pass: process.env.GMAIL_PASS
+  }
+});
+
 client.connect();
 const dataBase = process.env.MONGO_DB
 const userCred = process.env.MONGO_USER_CRED
@@ -20,9 +37,9 @@ async function insertData(data) {
   }
   try {
     let insertCred = await coll1.insertOne(data)
-    let insertData =await coll2.insertOne(userSchema)
+    let insertData = await coll2.insertOne(userSchema)
     if ((insertCred.acknowledged) && (insertData.acknowledged)) {
-      console.log(insertCred.acknowledged,insertData.acknowledged);
+      console.log(insertCred.acknowledged, insertData.acknowledged);
       return (insertCred.insertedId);
     }
     else {
@@ -50,9 +67,9 @@ async function verifyToken(token) {
       const query = await coll1.findOne(data);
       if (query._id.toString() == tokenData.id) {
         return ({
-          username:query.username,
-          name:query.name,
-          gender:query.gender
+          username: query.username,
+          name: query.name,
+          gender: query.gender
         });
       }
     }
@@ -105,11 +122,10 @@ async function checkLoginData(data) {
 async function checkUsername(data) {
   const db = client.db(dataBase);
   const coll = db.collection(userCred);
-  const coll1 = db.collection(userData);
   const check = await coll.findOne({ username: data.username });
   if (check == null) {
     if ('name' in data) {
-      let insertUser=await insertData(data)
+      let insertUser = await insertData(data)
       if (insertUser) {
         let cookieData = {
           id: insertUser,
@@ -159,6 +175,65 @@ async function hashPass(message) {
   }
 }
 
+
+async function playOtp(message, res) {
+  const db = client.db(dataBase);
+  const coll = db.collection(userCred);
+
+  let secret = speakeasy.generateSecret().base32
+  var token = speakeasy.totp({
+    secret: secret,
+    encoding: 'base32'
+  });
+  let mailText = token + ' is your OTP'
+  const mailOptions = {
+    from: process.env.GMAIL_ID,
+    to: message.email,
+    subject: 'OTP from Echo Chamber',
+    text: mailText
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+    } else {
+      // console.log('Email sent: ' + info.response);
+    }
+  });
+
+  let checkUser = await coll.findOne({ username: message.username, email: message.email })
+  if (checkUser === null) {
+    res.json(false)
+  }
+  else {
+    let updateUserOtp = await coll.updateOne({ username: message.username }, { $set: { OTP: token } })
+    res.json(true)
+  }
+}
+
+
+async function verifyOtp(message, res) {
+  const db = client.db(dataBase);
+  const coll = db.collection(userCred);
+  const user = await coll.findOne({ username: message.username })
+  if (message.otp === user.OTP)
+    res.json(true)
+  else
+    res.json(false)
+}
+
+
+async function changePassword(message,res){
+  const db = client.db(dataBase);
+  const coll = db.collection(userCred);
+
+  const salt = await bcrypt.genSalt(10)
+  const hashedPass = await bcrypt.hash(message.newPass, salt)
+  const updatePass=await coll.updateOne({username:message.username},{$set:{password:hashedPass,salt:salt}})
+  res.json(updatePass.acknowledged);
+}
+
+
 function auth(app) {
   //Login post request
   app.post('/login', async (req, res) => {
@@ -190,6 +265,24 @@ function auth(app) {
     const message = req.body.formData;
     res.json(await checkUsername(await hashPass(message)));
   });
+
+
+  app.post('/otp', (req, res) => {
+    const message = req.body.data.state
+    playOtp(message, res);
+  })
+
+  app.post('/verifyOtp', (req, res) => {
+    const message = req.body.data
+    verifyOtp(message, res)
+  }
+  )
+
+  app.post('/changePass',(req,res)=>{
+    const message=req.body.data
+    changePassword(message,res)
+  })
+
 }
 
 module.exports = auth;
