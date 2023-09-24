@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { AiFillLike } from 'react-icons/ai'
+import { AiFillLike, AiFillEdit, AiTwotoneDelete } from 'react-icons/ai'
 import { BiSolidComment } from 'react-icons/bi'
 import { BsDot } from 'react-icons/bs'
 
@@ -19,7 +19,7 @@ const Card = (props) => {
     let user = useSelector((store) => (store.user.data))
     const [comment, setComment] = useState('')
     const [commentBar, setCommentBar] = useState('none')
-    let { date, post, gender, id, username, likes, comments, likeCount, commentCount, liked } = props
+    let { date, post, gender, id, username, likes, comments, likeCount, commentCount, liked, displayPower } = props
     const [data, setData] = useState({
         date: date,
         post: post,
@@ -55,7 +55,7 @@ const Card = (props) => {
 
         if ('username' in user) {
             const like = await axios.post(backend_ref + '/like', { data: { id: id, myUsername: user.username, postUsername: username } })
-            setData(prevValue=>({
+            setData(prevValue => ({
                 ...prevValue,
                 ...like.data
             }))
@@ -75,7 +75,7 @@ const Card = (props) => {
         if ('username' in user) {
             const commentCheck = await axios.post(backend_ref + '/comment', { data: { id: id, myUsername: user.username, postUsername: username, comment: comment, gender: user.gender } })
             const newLikes = await axios.post(backend_ref + '/getstats', { data: { id: data.id } })
-            setData((prevValue) => ({ ...prevValue, likes: newLikes.data.likes, comments: newLikes.data.comments, likeCount: newLikes.data.likeCount, commentCount:newLikes.data.commentCount, liked:newLikes.data.liked }))
+            setData((prevValue) => ({ ...prevValue, likes: newLikes.data.likes, comments: newLikes.data.comments, likeCount: newLikes.data.likeCount, commentCount: newLikes.data.commentCount, liked: newLikes.data.liked }))
             toast('Comment added Sucessfully!')
             setComment('')
             navigateTo('/')
@@ -86,17 +86,24 @@ const Card = (props) => {
         }
     }
 
-
     const handleCommentChange = (e) => {
         setComment(e.target.value)
     }
-
 
     const handleCommentBar = () => {
         if (commentBar === 'none')
             setCommentBar('flex')
         else
             setCommentBar('none')
+    }
+
+    const handleDeletePost = async () => {
+        if ('username' in user) {
+            const deletePost = await axios.post(backend_ref + '/deletePost', { data: { username: user.username, postId: data.id } })
+        }
+    }
+    const handleEditPost=()=>{
+        
     }
 
     return (
@@ -117,15 +124,23 @@ const Card = (props) => {
                     <div className="post-text">
                         <p>{data.post}</p>
                     </div>
-                    <div className='like-comment'>
-                        <div className='likes'>
-                            <AiFillLike name='like' style={{ color: (data.liked === true) ? '#0072E8' : '#ffffff' }} onClick={handleLike} />
-                            <p>{data.likeCount}</p>
+                    <div className='like-comment-edit'>
+                        <div className='like-comment'>
+                            <div className='likes'>
+                                <AiFillLike name='like' style={{ color: (data.liked === true) ? '#0072E8' : '#ffffff' }} onClick={handleLike} />
+                                <p>{data.likeCount}</p>
+                            </div>
+                            <div className='comments'>
+                                <BiSolidComment name='comment' onClick={handleCommentBar} />
+                                <p>{data.commentCount}</p>
+                            </div>
                         </div>
-                        <div className='comments'>
-                            <BiSolidComment name='comment' onClick={handleCommentBar} />
-                            <p>{data.commentCount}</p>
-                        </div>
+                        {(displayPower) &&
+                            <div className='edit-delete'>
+                                <AiFillEdit handleEditPost />
+                                <AiTwotoneDelete handleDeletePost />
+                            </div>
+                        }
                     </div>
                 </div>
 

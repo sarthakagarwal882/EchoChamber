@@ -7,7 +7,7 @@ import backend_ref from './BackendRef'
 import Cookies from 'js-cookie'
 import { login } from '../Store/slice/userSlice'
 import Card from './Card'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
     const credentials = ((Cookies.get('echoChamberCred')))
@@ -77,7 +77,7 @@ const Dashboard = () => {
             <h1>Posts</h1>
             <div className='user-posts'>
                 {
-                    (data.posts).map(element=>(<Card key={element.uniqueId} date={element.date} post={element.post} gender={element.gender} id={element.uniqueId} username={userState.username} likes={element.likes} comments={element.comments} commentCount={element.commentCount} likeCount={element.likeCount} displayPower={'true'}/>))
+                    (data.posts).map(element => (<Card key={element.uniqueId} date={element.date} post={element.post} gender={element.gender} id={element.uniqueId} username={userState.username} likes={element.likes} comments={element.comments} commentCount={element.commentCount} likeCount={element.likeCount} liked={element.liked} displayPower={'true'} />))
                 }
             </div>
 

@@ -3,7 +3,7 @@
     margin: 2rem auto 0;
     border-radius: 4px;
     color: #ffffff;
-    margin: 2rem auto 3rem ;
+    margin: 2rem auto 3rem;
 }
 
 .card-header {
@@ -57,40 +57,44 @@
     border-radius: 10px;
 }
 
-.card-post .like-comment{
+.card-post .like-comment-edit {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 }
 
-.card-post .like-comment div{
-    margin:  0.5rem 1.3rem;
+.card-post .like-comment-edit div {
+    margin: 0.3rem 0.8rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.card-post .like-comment div svg{
+
+.card-post .like-comment-edit div svg {
     font-size: 1.5rem;
     margin: 0 0.6rem 0 0;
     cursor: pointer;
 }
 
-.comments-cover{
+.comments-cover {
     display: flex;
     width: 100%;
     justify-content: center;
-    border-top: 1px solid #323232 ;
+    border-top: 1px solid #323232;
     padding: 1rem 0 1rem 0;
     flex-direction: column;
 }
-.comments-cover form{
+
+.comments-cover form {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     width: 100%;
 }
-.comments-cover form input{
+
+.comments-cover form input {
     color: #b5b5b5;
     width: 80%;
     height: 2rem;
@@ -98,34 +102,41 @@
     background-color: transparent;
     border: 2px solid #757575;
 }
-.comments-cover form button{
+
+.comments-cover form button {
     padding: 1% 2%;
     border-radius: 10px;
     transition: 0.1s ease-in-out;
     border: none;
 }
-.comments-cover form button:hover{
+
+.comments-cover form button:hover {
     background-color: #e58014;
     padding: 1% 2%;
     border-radius: 10px;
     cursor: pointer;
 }
-.other-comments{
+
+.other-comments {
     display: flex;
     flex-direction: row;
     margin: 1rem 0;
 }
-.other-profile{
-    padding:  1rem;
+
+.other-profile {
+    padding: 1rem;
 }
-.other-comments .other-profile img{
+
+.other-comments .other-profile img {
     width: 30px;
     height: 30px;
 }
-.other-comment-text p:first-child{
+
+.other-comment-text p:first-child {
     font-weight: 700;
 }
-.other-comment-text p:last-child{
+
+.other-comment-text p:last-child {
     color: #929292;
     font-size: 0.9rem;
 }
@@ -155,7 +166,7 @@
         margin: 2rem auto 0;
         border-radius: 4px;
         color: #ffffff;
-        margin: 2rem auto 3rem ;
+        margin: 2rem auto 3rem;
     }
 }
 
@@ -167,7 +178,7 @@
         margin: 2rem auto 0;
         border-radius: 4px;
         color: #ffffff;
-        margin: 2rem auto 3rem ;
+        margin: 2rem auto 3rem;
     }
 }
 
@@ -177,19 +188,20 @@
         margin: 2rem auto 0;
         border-radius: 4px;
         color: #ffffff;
-        margin: 2rem auto 3rem ;
+        margin: 2rem auto 3rem;
     }
 }
+
 @media only screen and (max-width:500px) {
     .card {
         width: 100%;
         margin: 2rem auto 0;
         border-radius: 4px;
         color: #ffffff;
-        margin: 2rem auto 3rem ;
+        margin: 2rem auto 3rem;
     }
- 
-    
+
+
     .card-header {
         height: 2.5rem;
         width: 100%;
@@ -198,19 +210,19 @@
         flex-direction: row;
         justify-content: space-between;
     }
-    
+
     .card-user {
         display: flex;
         flex-direction: row;
         align-items: center;
     }
-    
+
     .card-user img {
         width: 30px;
         height: 30px;
         margin: 0 10px 0 0;
     }
-    
+
     .card-date {
         display: flex;
         align-items: center;
@@ -218,62 +230,70 @@
         font-size: 0.9rem;
         font-weight: 300;
     }
-    
+
     .card-date svg {
         font-size: 2rem;
         margin: 0 0 0 0;
     }
-    
-    
+
+
     .card-post-wrapper {
         border: 2px solid #323232;
         border-radius: 10px;
     }
-        
+
     .card-post {
         padding: 0.1rem;
     }
-    
+
     .card-post .post-text {
         padding: 1rem;
         border: 1px solid #323232;
         border-radius: 10px;
     }
-    
-    .card-post .like-comment{
+
+    .card-post .like-comment-edit {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
     }
-    
-    .card-post .like-comment div{
-        margin:  0.5rem 1.3rem;
+
+    .card-post .like-comment div {
+        margin: 0.5rem 1.3rem;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
     }
-    .card-post .like-comment div svg{
+
+    .card-post .like-comment-edit div svg {
         font-size: 1.5rem;
         margin: 0 0.6rem 0 0;
         cursor: pointer;
     }
-    
-    .comments-cover{
+    .like-comment-edit .like-comment{
+        display: flex;
+        justify-content: center;
+    }
+
+    .comments-cover {
         display: flex;
         width: 100%;
         justify-content: center;
-        border-top: 1px solid #323232 ;
+        border-top: 1px solid #323232;
         padding: 1rem 0 1rem 0;
         flex-direction: column;
     }
-    .comments-cover form{
+
+    .comments-cover form {
         display: flex;
         justify-content: space-evenly;
         flex-direction: row;
         width: 100%;
     }
-    .comments-cover form input{
+
+    .comments-cover form input {
         color: #b5b5b5;
         width: 80%;
         height: 2rem;
@@ -281,34 +301,41 @@
         background-color: transparent;
         border: 2px solid #757575;
     }
-    .comments-cover form button{
+
+    .comments-cover form button {
         padding: 1% 2%;
         border-radius: 10px;
         transition: 0.1s ease-in-out;
         border: none;
     }
-    .comments-cover form button:hover{
+
+    .comments-cover form button:hover {
         background-color: #e58014;
         padding: 1% 2%;
         border-radius: 10px;
         cursor: pointer;
     }
-    .other-comments{
+
+    .other-comments {
         display: flex;
         flex-direction: row;
         margin: 1rem 0;
     }
-    .other-profile{
-        padding:  1rem;
+
+    .other-profile {
+        padding: 1rem;
     }
-    .other-comments .other-profile img{
+
+    .other-comments .other-profile img {
         width: 30px;
         height: 30px;
     }
-    .other-comment-text p:first-child{
+
+    .other-comment-text p:first-child {
         font-weight: 700;
     }
-    .other-comment-text p:last-child{
+
+    .other-comment-text p:last-child {
         color: #929292;
         font-size: 0.9rem;
     }
