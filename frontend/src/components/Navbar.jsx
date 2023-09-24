@@ -64,9 +64,11 @@ const Navbar = () => {
                                     <span className={setProfileImg()}></span>
                                 </div>
                                 <div className="nav-drop-menu" onMouseLeave={setDropdownFunc} style={{ display: dropDown }}>
+                                    <Link to={'/dashboard'}>
                                     <div>
                                         <span>dashboard</span>
                                     </div>
+                                    </Link>
                                     <hr />
                                     <div onClick={handleLogout}>
                                         <span>logout</span>

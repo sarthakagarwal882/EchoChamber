@@ -67,7 +67,6 @@ async function getPosts() {
 async function likePost(message, res, action) {
     try {
         const db = client.db(dataBase);
-        const coll = db.collection(userCred);
         const coll1 = db.collection(userData);
         const coll2 = db.collection(commonData);
         let like2;
@@ -125,7 +124,7 @@ async function getStats(message, res) {
 
 async function commentPost(message, res) {
     // console.log(message);
-    const uniqueId=generateUniqueId()
+    const uniqueId = generateUniqueId()
     try {
         const db = client.db(dataBase);
         const coll1 = db.collection(userData);
@@ -136,7 +135,7 @@ async function commentPost(message, res) {
             {
                 $push: {
                     comments: {
-                        uniqueId:uniqueId,
+                        uniqueId: uniqueId,
                         username: message.myUsername,
                         gender: message.gender,
                         comment: message.comment
@@ -152,7 +151,7 @@ async function commentPost(message, res) {
                     let checkUpdate = await coll1.updateOne({ username: message.postUsername }, {
                         $push: {
                             [`posts.${index}.comments`]: {
-                                uniqueId:uniqueId,
+                                uniqueId: uniqueId,
                                 username: message.myUsername,
                                 gender: message.gender,
                                 comment: message.comment
@@ -173,6 +172,22 @@ async function commentPost(message, res) {
 }
 
 
+async function getMyInfo(message, res) {
+    try {
+        const db = client.db(dataBase);
+        const coll = db.collection(userCred);
+        const coll1 = db.collection(userData);
+        const data = await coll.findOne({ username: message.username })
+        const data1 = await coll1.findOne({ username: message.username })
+        res.json({ username: data.username, gender: data.gender, name: data.name, posts:data1.posts,email:data.email})
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
 function post(app) {
     app.post('/postData', async (req, res) => {
         const message = req.body.data;
@@ -191,17 +206,21 @@ function post(app) {
         const message = req.body.data
         likePost(message, res, 'unlike')
     })
-    app.get('/test', (req,res) => {
+    app.get('/test', (req, res) => {
         res.json('Test Successful!')
     })
     app.post('/getstats', async (req, res) => {
-        
+
         let message = req.body.data
         getStats(message, res)
     })
     app.post('/comment', (req, res) => {
         let message = req.body.data
         commentPost(message, res)
+    })
+    app.post('/myinfo', (req, res) => {
+        const message = req.body.data
+        getMyInfo(message, res);
     })
 }
 
