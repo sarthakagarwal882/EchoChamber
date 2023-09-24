@@ -5,6 +5,8 @@ import axios from 'axios'
 import backend_ref from '../BackendRef'
 import { useNavigate } from 'react-router'
 import { ToastContainer, toast } from 'react-toastify'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 const ForgotPass = () => {
     // eslint-disable-next-line no-unused-vars
     const navigateTo = useNavigate()
@@ -53,7 +55,7 @@ const ForgotPass = () => {
             setOtpverify('true')
             setOtprender('none')
         }
-        else{
+        else {
             toast('Wrong Otp')
         }
     }
@@ -65,30 +67,29 @@ const ForgotPass = () => {
 
     const handlePassChange = (e) => {
         let { name, value } = e.target
-        setpassword((prevvalue)=>({
+        setpassword((prevvalue) => ({
             ...prevvalue,
-            [name]:value
+            [name]: value
         }))
     }
 
-    const handlePasswordSubmit =async (e) => {
+    const handlePasswordSubmit = async (e) => {
         e.preventDefault()
-        console.log(password.pass===password.cfpass);
-        if(password.pass===password.cfpass)
-        {
-            let changePass=await axios.post(backend_ref+'/changePass',{data:{username:state.username,newPass:password.pass}})
-            if(changePass.data){
+        console.log(password.pass === password.cfpass);
+        if (password.pass === password.cfpass) {
+            let changePass = await axios.post(backend_ref + '/changePass', { data: { username: state.username, newPass: password.pass } })
+            if (changePass.data) {
                 toast('Password changed Sucessfully! Redirecting to Home page!')
-                setTimeout(()=>{
+                setTimeout(() => {
                     navigateTo('/')
-                },3000)
+                }, 3000)
             }
         }
-        else{
+        else {
             toast('Passwords do not match!')
             setpassword({
-                pass:'',
-                cfpass:''
+                pass: '',
+                cfpass: ''
             })
         }
     }
@@ -102,16 +103,21 @@ const ForgotPass = () => {
                     {(otpRender === 'none') ?
                         <>{(otpVerify === 'true') ?
                             <div className='new-password'>
-                                <form  onSubmit={handlePasswordSubmit}>
+                                <Link to={'/'}>
+                                    <AiOutlineCloseCircle />
+                                </Link>
+                                <form onSubmit={handlePasswordSubmit}>
                                     <h2>Enter new password</h2>
-                                    <input name='pass' value={password.pass} type="text" onChange={handlePassChange} />
-                                    <input name='cfpass' value={password.cfpass} type="text" onChange={handlePassChange} />
+                                    <input name='pass' value={password.pass} type="password" onChange={handlePassChange} />
+                                    <input name='cfpass' value={password.cfpass} type="password" onChange={handlePassChange} />
                                     <button>Submit</button>
                                 </form>
                             </div>
                             :
                             <div className="forgotpass">
-                                <form onSubmit={handleSubmit}>
+                                <Link to={'/'}>
+                                    <AiOutlineCloseCircle />
+                                </Link>                                <form onSubmit={handleSubmit}>
                                     <h2>Enter Email and username to continue</h2>
                                     <input name='email' value={state.email} onChange={handleChange} type="email" placeholder="Enter your Email" />
                                     <input name='username' value={state.username} onChange={handleChange} type="text" placeholder="Enter your Username" />
@@ -122,7 +128,9 @@ const ForgotPass = () => {
                         </>
                         :
                         <div className='otp-wrapper'>
-                            <form onSubmit={handleOtpSubmit}>
+                            <Link to={'/'}>
+                                <AiOutlineCloseCircle />
+                            </Link>                            <form onSubmit={handleOtpSubmit}>
                                 <h2>Enter Otp Here! </h2>
                                 <p>Sent in Email</p>
                                 <input name='otp' value={otp} onChange={hnadleOtpChange} type="text" />

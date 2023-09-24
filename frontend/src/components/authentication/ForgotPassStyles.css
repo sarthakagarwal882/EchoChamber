@@ -144,3 +144,333 @@
     text-align: center;
     margin: 0 0 1rem 0;
 }
+
+
+.new-password svg{
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 2rem;
+    position: absolute;
+    top: 10rem;
+    right: 30%;
+}
+.forgotpass svg{
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 2rem;
+    position: absolute;
+    top: 10rem;
+    right: 30%;
+}
+.otp-wrapper svg{
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 2rem;
+    position: absolute;
+    top: 10rem;
+    right: 30%;
+}
+
+
+@media only screen and (max-width:1200px) {
+
+    .new-password form {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .otp-wrapper form {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .forgotpass form {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .new-password svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 25%;
+    }
+    .forgotpass svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 25%;
+    }
+    .otp-wrapper svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 25%;
+    }
+}
+
+@media only screen and (max-width:1000px) {
+    .new-password form {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .otp-wrapper form {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .forgotpass form {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .new-password svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 20%;
+    }
+    .forgotpass svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 20%;
+    }
+    .otp-wrapper svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 20%;
+    }
+}
+
+@media only screen and (max-width:900px) {
+    .new-password form {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .otp-wrapper form {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .forgotpass form {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+}
+
+@media only screen and (max-width:700px) {
+    .new-password form {
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .otp-wrapper form {
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .forgotpass form {
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .new-password svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 10%;
+    }
+    .forgotpass svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 10%;
+    }
+    .otp-wrapper svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 10%;
+    }
+}
+@media only screen and (max-width:650px) {
+    .new-password form {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .otp-wrapper form {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .forgotpass form {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .new-password svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 5%;
+    }
+    .forgotpass svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 5%;
+    }
+    .otp-wrapper svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 5%;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .new-password form {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .otp-wrapper form {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .forgotpass form {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #7c7c7c;
+        padding: 4rem;
+        border-radius: 2px;
+    }
+    .new-password svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 2.5%;
+    }
+    .forgotpass svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 2.5%;
+    }
+    .otp-wrapper svg{
+        color: #ffffff;
+        font-size: 2rem;
+        position: absolute;
+        top: 10rem;
+        right: 2.5%;
+    }
+}
