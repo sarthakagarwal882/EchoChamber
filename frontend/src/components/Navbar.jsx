@@ -8,6 +8,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Cookies from "js-cookie"
 import { login } from "../Store/slice/userSlice"
+import { toast } from "react-toastify"
 const Navbar = () => {
     const dispatch = useDispatch()
     const navigateTo = useNavigate()
@@ -38,9 +39,9 @@ const Navbar = () => {
 
     function handleLogout() {
         Cookies.remove('echoChamberCred')
+        toast('Logged out Sucessfully!')
         dispatch(login({}))
         navigateTo('/')
-
     }
 
 

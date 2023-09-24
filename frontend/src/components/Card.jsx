@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+
 import { AiFillLike } from 'react-icons/ai'
 import { BiSolidComment } from 'react-icons/bi'
 import { BsDot } from 'react-icons/bs'
@@ -13,12 +13,12 @@ import backend_ref from './BackendRef'
 import { useEffect, useState } from 'react'
 
 const Card = (props) => {
+    const cardState = useSelector(store => store.posts.data)
     const navigateTo = useNavigate()
     let user = useSelector((store) => (store.user.data))
     const [comment, setComment] = useState('')
-    const [liked, setLiked] = useState('#ffffff');
     const [commentBar, setCommentBar] = useState('none')
-    let { date, post, gender, id, username, likes, comments } = props
+    let { date, post, gender, id, username, likes, comments, likeCount, commentCount, liked } = props
     const [data, setData] = useState({
         date: date,
         post: post,
@@ -27,52 +27,37 @@ const Card = (props) => {
         username: username,
         likes: likes,
         comments: comments,
-        likeCount: likes.length,
-        commentCount: comments.length
+        likeCount: likeCount,
+        commentCount: commentCount,
+        liked: liked
     })
 
-
-
-
     useEffect(() => {
-        let checkLike = ((data.likes).filter(element => (element === user.username)))
-        if (checkLike.length > 0)
-            setLiked('#0072E8')
-        else {
-            setLiked('#ffffff')
-        }
-    }, [])
+        setData({
+            date: date,
+            post: post,
+            gender: gender,
+            id: id,
+            username: username,
+            likes: likes,
+            comments: comments,
+            likeCount: likeCount,
+            commentCount: commentCount,
+            liked: liked
+        })
+    }, [commentCount, comments, date, gender, id, likeCount, liked, likes, post, props, username])
 
 
 
-    const handleLike = async (event) => {
+
+    const handleLike = async () => {
 
         if ('username' in user) {
-
-            if (liked == '#0072E8') {
-                const removeLike = await axios.post(backend_ref + '/rmlike', { data: { id: id, myUsername: user.username, postUsername: username } })
-                if (removeLike.data) {
-                    console.log(removeLike.data);
-                    const newLikes = await axios.post(backend_ref + '/getstats', { data: { id: data.id } })
-                    setData((prevValue) => ({ ...prevValue, likes: newLikes.data.likes, comments: newLikes.data.comments, likeCount: prevValue.likeCount - 1 }))
-
-                    setLiked('#ffffff')
-                }
-                else {
-                    toast('unlike failed! Try again Later!')
-                }
-            }
-            else {
-                const addLike = await axios.post(backend_ref + '/like', { data: { id: id, myUsername: user.username, postUsername: username } });
-                if (addLike.data) {
-                    setData((prevValue) => ({ ...prevValue, likeCount: data.likeCount + 1, likes: (data.likes).push(user.username) }))
-                    setLiked('#0072E8')
-                    console.log(data.likes);
-                }
-                else {
-                    toast('Error! Try again later!')
-                }
-            }
+            const like = await axios.post(backend_ref + '/like', { data: { id: id, myUsername: user.username, postUsername: username } })
+            setData(prevValue=>({
+                ...prevValue,
+                ...like.data
+            }))
         }
 
         else {
@@ -133,12 +118,12 @@ const Card = (props) => {
                     </div>
                     <div className='like-comment'>
                         <div className='likes'>
-                            <AiFillLike name='like' style={{ color: liked }} onClick={handleLike} />
+                            <AiFillLike name='like' style={{ color: (data.liked === true) ? '#0072E8' : '#ffffff' }} onClick={handleLike} />
                             <p>{data.likeCount}</p>
                         </div>
                         <div className='comments'>
                             <BiSolidComment name='comment' onClick={handleCommentBar} />
-                            <p>{(data.comments).length}</p>
+                            <p>{data.commentCount}</p>
                         </div>
                     </div>
                 </div>

@@ -176,6 +176,7 @@ async function hashPass(message) {
 }
 
 
+
 async function playOtp(message, res) {
   const db = client.db(dataBase);
   const coll = db.collection(userCred);
@@ -197,7 +198,6 @@ async function playOtp(message, res) {
     if (error) {
       console.error(error);
     } else {
-      // console.log('Email sent: ' + info.response);
     }
   });
 
@@ -212,6 +212,7 @@ async function playOtp(message, res) {
 }
 
 
+
 async function verifyOtp(message, res) {
   const db = client.db(dataBase);
   const coll = db.collection(userCred);
@@ -223,13 +224,13 @@ async function verifyOtp(message, res) {
 }
 
 
-async function changePassword(message,res){
+async function changePassword(message, res) {
   const db = client.db(dataBase);
   const coll = db.collection(userCred);
 
   const salt = await bcrypt.genSalt(10)
   const hashedPass = await bcrypt.hash(message.newPass, salt)
-  const updatePass=await coll.updateOne({username:message.username},{$set:{password:hashedPass,salt:salt}})
+  const updatePass = await coll.updateOne({ username: message.username }, { $set: { password: hashedPass, salt: salt } })
   res.json(updatePass.acknowledged);
 }
 
@@ -266,21 +267,23 @@ function auth(app) {
     res.json(await checkUsername(await hashPass(message)));
   });
 
-
+  //Generation and sending of OTP via Email
   app.post('/otp', (req, res) => {
     const message = req.body.data.state
     playOtp(message, res);
   })
 
+  //Verification of the OTP sent on Email
   app.post('/verifyOtp', (req, res) => {
     const message = req.body.data
     verifyOtp(message, res)
   }
   )
 
-  app.post('/changePass',(req,res)=>{
-    const message=req.body.data
-    changePassword(message,res)
+  //Change password Post request
+  app.post('/changePass', (req, res) => {
+    const message = req.body.data
+    changePassword(message, res)
   })
 
 }

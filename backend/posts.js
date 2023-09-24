@@ -51,62 +51,99 @@ async function postuser(data) {
     }
 }
 
-async function getPosts() {
+
+
+async function getPosts(message, res) {
     try {
         const db = client.db(dataBase);
         const coll2 = db.collection(commonData);
-
         let data = await coll2.find({}).toArray();
-        return (data);
+        if (message.username === '') {
+            let finalData = data.map(element => (
+                {
+                    ...element,
+                    likeCount: (element.likes).length,
+                    commentCount: (element.comments).length,
+                    liked: false
+                }
+            ))
+            res.json(finalData);
+        }
+        else {
+            let finalData = data.map(element => {
+
+                let likeCheck = (element.likes).filter((item) => (item == message.username))
+                if (likeCheck.length > 0)
+                    likeCheck = true
+                else
+                    likeCheck = false
+
+                return ({
+                    ...element,
+                    likeCount: (element.likes).length,
+                    commentCount: (element.comments).length,
+                    liked: likeCheck
+                })
+            }
+            )
+
+            res.json(finalData);
+        }
+
     }
     catch (err) {
         console.log('err');
     }
 }
 
-async function likePost(message, res, action) {
+
+
+async function likePost(message, res) {
     try {
         const db = client.db(dataBase);
         const coll1 = db.collection(userData);
         const coll2 = db.collection(commonData);
-        let like2;
-        if (action === 'like') {
-            like2 = await coll2.updateOne(
-                { uniqueId: message.id },
-                { $push: { likes: message.myUsername } }
-            )
-        }
-        else {
-            like2 = await coll2.updateOne(
-                { uniqueId: message.id },
-                { $pull: { likes: message.myUsername } }
-            )
-        }
-
-
-        const collection1 = await coll1.findOne({ username: message.postUsername })
-        if (collection1 !== null) {
-            (collection1.posts).forEach(async (element, index) => {
-                if (element.uniqueId === message.id) {
-                    if (action === 'like') {
-                        let checkUpdate = await coll1.updateOne({ username: message.postUsername }, {
-                            $push: { [`posts.${index}.likes`]: message.myUsername }
-                        })
-                        res.json(checkUpdate.acknowledged && like2.acknowledged)
-                    }
-                    else {
-                        let checkUpdate = await coll1.updateOne({ username: message.postUsername }, {
-                            $pull: { [`posts.${index}.likes`]: message.myUsername }
-                        })
-                        res.json(checkUpdate.acknowledged && like2.acknowledged)
-                    }
+        let userPostNum;
+        const fetchData = await coll1.findOne({ username: message.postUsername })
+        if (fetchData !== null) {
+            const findPost = (fetchData.posts).find((item, index) => {
+                if (item.uniqueId === message.id) {
+                    userPostNum = index;
+                    return item
                 }
+            })
+            const checkLike = (findPost.likes).filter(item => (item === message.myUsername))
 
-            });
+            if (checkLike.length > 0) {
+                //removing Like
+                let rmLikeAll = await coll2.updateOne(
+                    { uniqueId: message.id },
+                    { $pull: { likes: message.myUsername } }
+                )
+                let rmLikeUser = await coll1.updateOne({ username: message.postUsername }, {
+                    $pull: { [`posts.${userPostNum}.likes`]: message.myUsername }
+                })
+                // console.log(rmLikeAll.acknowledged && rmLikeUser.acknowledged);
+                getStats(message, res)
+            }
+            else {
+                //adding Like
+                let addLikeAll = await coll2.updateOne(
+                    { uniqueId: message.id },
+                    { $push: { likes: message.myUsername } }
+                )
+                let addLikeUser = await coll1.updateOne({ username: message.postUsername }, {
+                    $push: { [`posts.${userPostNum}.likes`]: message.myUsername }
+                })
+                // console.log(addLikeAll.acknowledged && addLikeUser.acknowledged);
+                getStats(message, res)
+            }
+
         }
+
     }
     catch (err) {
-        console.log('err');
+        console.log(err);
     }
 }
 
@@ -115,7 +152,13 @@ async function getStats(message, res) {
         const db = client.db(dataBase);
         const coll2 = db.collection(commonData);
         const data = await coll2.findOne({ uniqueId: message.id })
-        res.json({ likes: data.likes, comments: data.comments })
+        const checkLike = (data.likes).filter(item => (item === message.myUsername))
+        let liked;
+        if (checkLike.length > 0)
+            liked = true
+        else
+            liked = false
+        res.json({ likes: data.likes, comments: data.comments, likeCount: (data.likes).length, commentCount: (data.comments).length, liked: liked })
     }
     catch (e) {
         console.log('e');
@@ -179,7 +222,7 @@ async function getMyInfo(message, res) {
         const coll1 = db.collection(userData);
         const data = await coll.findOne({ username: message.username })
         const data1 = await coll1.findOne({ username: message.username })
-        res.json({ username: data.username, gender: data.gender, name: data.name, posts:data1.posts,email:data.email})
+        res.json({ username: data.username, gender: data.gender, name: data.name, posts: data1.posts, email: data.email })
 
     } catch (error) {
         console.log(error);
@@ -194,23 +237,20 @@ function post(app) {
         res.json(await postuser(message))
     });
 
-    app.get('/getData', async (req, res) => {
-        res.json(await getPosts());
+    app.post('/getData', async (req, res) => {
+        const message = req.body.data
+        await getPosts(message, res);
     })
 
     app.post('/like', async (req, res) => {
         const message = req.body.data
-        likePost(message, res, 'like')
+        likePost(message, res)
     })
-    app.post('/rmlike', async (req, res) => {
-        const message = req.body.data
-        likePost(message, res, 'unlike')
-    })
+
     app.get('/test', (req, res) => {
         res.json('Test Successful!')
     })
     app.post('/getstats', async (req, res) => {
-
         let message = req.body.data
         getStats(message, res)
     })
