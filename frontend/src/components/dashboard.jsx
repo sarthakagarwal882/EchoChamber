@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react'
-import './DashboardStyles.css'
+import './DashBoardStyles.css'
 import axios from 'axios'
 import { useDispatch, useSelector } from "react-redux"
 import backend_ref from './BackendRef'
