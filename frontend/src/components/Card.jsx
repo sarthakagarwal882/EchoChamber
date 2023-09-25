@@ -1,25 +1,27 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { AiFillLike, AiFillEdit, AiTwotoneDelete } from 'react-icons/ai'
+import { AiFillLike, AiFillEdit, AiTwotoneDelete, AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'
 import { BiSolidComment } from 'react-icons/bi'
 import { BsDot } from 'react-icons/bs'
 
 import "./CardStyles.css"
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
 import backend_ref from './BackendRef'
 import { useEffect, useState } from 'react'
-
+import { addData } from '../Store/slice/AllPostSlice'
 const Card = (props) => {
-    const cardState = useSelector(store => store.posts.data)
+    const dispatch = useDispatch()
     const navigateTo = useNavigate()
     let user = useSelector((store) => (store.user.data))
     const [comment, setComment] = useState('')
     const [commentBar, setCommentBar] = useState('none')
     let { date, post, gender, id, username, likes, comments, likeCount, commentCount, liked, displayPower } = props
+    let [inputPost, setInputPost] = useState(post)
+    let [showInputPost, setShowInputPost] = useState(null)
     const [data, setData] = useState({
         date: date,
         post: post,
@@ -100,11 +102,42 @@ const Card = (props) => {
     const handleDeletePost = async () => {
         if ('username' in user) {
             const deletePost = await axios.post(backend_ref + '/deletePost', { data: { username: user.username, postId: data.id } })
+            if (deletePost.data) {
+                dispatch(addData(deletePost.data))
+                toast('Post deleted Sucessfully')
+            }
+            else {
+                toast('Sorry, Try again later!')
+            }
+            
         }
     }
-    const handleEditPost=()=>{
-        
+    
+    const handleEditPost = async () => {
+        const editPost = await axios.post(backend_ref + '/editPost', { data: { username: user.username, postId: data.id, newPost: inputPost } })
+        if (editPost.data) {
+            dispatch(addData(editPost.data))
+            toast('Post uodated Sucessfully')
+            handleShowEditPost()
+        }
+        else
+            toast('Post ')
     }
+
+    const handleShowEditPost = () => {
+        if (showInputPost === null) {
+            setShowInputPost(true)
+        }
+        else
+            setShowInputPost(null)
+    }
+
+    const handleInputPostChange = (e) => {
+        let { value } = e.target
+        console.log(value);
+        setInputPost(value)
+    }
+
 
     return (
         <div className="card">
@@ -122,7 +155,11 @@ const Card = (props) => {
 
                 <div className='card-post'>
                     <div className="post-text">
-                        <p>{data.post}</p>
+                        {(showInputPost) ?
+                            <textarea value={inputPost} name='inputPost' onChange={handleInputPostChange} />
+                            :
+                            <p>{data.post}</p>
+                        }
                     </div>
                     <div className='like-comment-edit'>
                         <div className='like-comment'>
@@ -137,8 +174,17 @@ const Card = (props) => {
                         </div>
                         {(displayPower) &&
                             <div className='edit-delete'>
-                                <AiFillEdit handleEditPost />
-                                <AiTwotoneDelete handleDeletePost />
+                                {(showInputPost) ?
+                                    <>
+                                        <AiOutlineCheck onClick={handleEditPost} />
+                                        <AiOutlineClose onClick={handleShowEditPost} />
+                                    </>
+                                    :
+                                    <>
+                                        <AiFillEdit onClick={handleShowEditPost} />
+                                        <AiTwotoneDelete onClick={handleDeletePost} />
+                                    </>
+                                }
                             </div>
                         }
                     </div>

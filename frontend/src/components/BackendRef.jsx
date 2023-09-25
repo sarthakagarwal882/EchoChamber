@@ -5,6 +5,6 @@ if (import.meta.env.MODE === 'production') {
 else if (import.meta.env.MODE === 'development') {
     backend_ref = import.meta.env.VITE_LOCAL_LINK
 }
-backend_ref = import.meta.env.VITE_SERVER_LINK
+// backend_ref = import.meta.env.VITE_SERVER_LINK
 
 export default backend_ref

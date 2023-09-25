@@ -8,7 +8,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Cookies from "js-cookie"
 import { login } from "../Store/slice/userSlice"
-import { toast } from "react-toastify"
+import { toast,ToastContainer } from "react-toastify"
 const Navbar = () => {
     const dispatch = useDispatch()
     const navigateTo = useNavigate()
@@ -113,7 +113,18 @@ const Navbar = () => {
 
                 </div>
             </div >
-
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </>
     )
 

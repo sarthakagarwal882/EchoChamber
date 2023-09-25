@@ -147,6 +147,8 @@ async function likePost(message, res) {
     }
 }
 
+
+
 async function getStats(message, res) {
     try {
         const db = client.db(dataBase);
@@ -165,8 +167,8 @@ async function getStats(message, res) {
     }
 }
 
+
 async function commentPost(message, res) {
-    // console.log(message);
     const uniqueId = generateUniqueId()
     try {
         const db = client.db(dataBase);
@@ -215,6 +217,7 @@ async function commentPost(message, res) {
 }
 
 
+
 async function getMyInfo(message, res) {
     try {
         const db = client.db(dataBase);
@@ -225,7 +228,7 @@ async function getMyInfo(message, res) {
         let posts = (data1.posts).map(element => {
             let likeCount = (element.likes).length
             let commentCount = (element.comments).length
-            let liked = (element.likes).filter(element=>(element===message.username))
+            let liked = (element.likes).filter(element => (element === message.username))
             if (liked.length > 0)
                 liked = true
             else
@@ -244,6 +247,63 @@ async function getMyInfo(message, res) {
         console.log(error);
     }
 }
+
+
+
+async function deletePost(message, res) {
+    try {
+        const db = client.db(dataBase);
+        const coll1 = db.collection(userData);
+        const coll2 = db.collection(commonData);
+
+        const deleteCommonPost = await coll2.deleteOne({ username: message.username, uniqueId: message.postId })
+        const findUserPost = await coll1.findOne({ username: message.username })
+        if (findUserPost !== null) {
+            (findUserPost.posts).map(async (element, index) => {
+                if (element.uniqueId === message.postId) {
+                    const deleteUserPost = await coll1.updateOne({ username: message.username }, {
+                        $pull: { [`posts`]: { uniqueId: message.postId } }
+                    })
+                    if (deleteCommonPost.acknowledged && deleteUserPost.acknowledged) {
+                        getPosts({ username: message.username }, res)
+                    }
+                }
+            })
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+
+
+
+async function updatePost(message, res) {
+    try {
+        const db = client.db(dataBase);
+        const coll1 = db.collection(userData);
+        const coll2 = db.collection(commonData);
+        const updateCommonPost = await coll2.updateOne({ username: message.username, uniqueId: message.postId }, { $set: { ['post']: message.newPost } })
+        const findUserPost = await coll1.findOne({ username: message.username })
+        if (findUserPost !== null) {
+            (findUserPost.posts).map(async (element, index) => {
+                if (element.uniqueId === message.postId) {
+                    const updateUserPost = await coll1.updateOne({ username: message.username }, {
+                        $set: { [`posts.${index}.post`]: message.newPost }
+                    })
+                    if (updateCommonPost.acknowledged && updateUserPost.acknowledged) {
+                        getPosts({ username: message.username }, res)
+                    }
+                }
+            })
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+
+
 
 
 
@@ -277,6 +337,14 @@ function post(app) {
     app.post('/myinfo', (req, res) => {
         const message = req.body.data
         getMyInfo(message, res);
+    })
+    app.post('/deletePost', (req, res) => {
+        const message = req.body.data
+        deletePost(message, res)
+    })
+    app.post('/editPost', (req, res) => {
+        const message = req.body.data
+        updatePost(message, res)
     })
 }
 

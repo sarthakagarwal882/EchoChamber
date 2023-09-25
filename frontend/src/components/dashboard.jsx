@@ -8,12 +8,14 @@ import Cookies from 'js-cookie'
 import { login } from '../Store/slice/userSlice'
 import Card from './Card'
 import { Link } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 const Dashboard = () => {
     const credentials = ((Cookies.get('echoChamberCred')))
     const dispatch = useDispatch()
     const [display, setDisplay] = useState('none')
     const userState = useSelector((store) => (store.user.data))
+    const homeData=useSelector(store=>store.posts.data)
     const [data, setdata] = useState({
         name: '',
         gender: '',
@@ -29,25 +31,26 @@ const Dashboard = () => {
             if (check.data === undefined)
                 null
             else
-                dispatch(login(check.data))
+            dispatch(login(check.data))
         }
 
         if (credentials !== undefined)
             checkCookiedata(JSON.parse(credentials))
 
-    }, [])
+    },[])
 
-
-
-    const getdata = async () => {
-        if (!('username' in userState))
-            null
-        else {
-            const info = await axios.post(backend_ref + '/myinfo', { data: { username: userState.username } })
-            setdata(info.data)
+    useEffect(() => {
+        const getdata = async () => {
+            if (!('username' in userState))
+                null
+            else {
+                const info = await axios.post(backend_ref + '/myinfo', { data: { username: userState.username } })
+                setdata(info.data)
+            }
         }
-    }
-    getdata()
+        getdata()
+
+    }, [userState,homeData])
 
     return (
         <div className='dashboard'>
@@ -80,7 +83,6 @@ const Dashboard = () => {
                     (data.posts).map(element => (<Card key={element.uniqueId} date={element.date} post={element.post} gender={element.gender} id={element.uniqueId} username={userState.username} likes={element.likes} comments={element.comments} commentCount={element.commentCount} likeCount={element.likeCount} liked={element.liked} displayPower={'true'} />))
                 }
             </div>
-
         </div>
     )
 }
@@ -88,4 +90,3 @@ const Dashboard = () => {
 export default Dashboard
 
 
-// let { date, post, gender, id, username, likes, comments } = props

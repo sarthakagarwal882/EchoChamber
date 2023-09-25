@@ -57,6 +57,21 @@
     border-radius: 10px;
 }
 
+.card-post .post-text textarea{
+width: 100%;
+resize: none;
+overflow: hidden;
+background-color: transparent;
+color: #ffffff;
+height: 5rem;
+font-size: 1.1rem;
+border: none;
+}
+
+.card-post .post-text textarea:focus{
+    outline: none;
+}
+
 .card-post .like-comment-edit {
     display: flex;
     flex-direction: row;
