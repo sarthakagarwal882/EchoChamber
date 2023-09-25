@@ -8,6 +8,7 @@ import { login } from '../../Store/slice/userSlice'
 import Cookies from "js-cookie";
 import backend_ref from "../BackendRef";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -46,7 +47,7 @@ const Login = () => {
             }
             else {
                 setSubmitState('true')
-                alert('Invalid username or password')
+                toast('Invalid username or password')
             }
         }
         catch (error) {

@@ -63,7 +63,11 @@ const SignUp = () => {
         }
         else if (check.data === false) {
             setRegState('true')
-            alert("username already taken");
+            toast("username already taken");
+            setFormData((prevValue)=>({
+                ...prevValue,
+                username:''
+            }))
         }
     }
 
@@ -123,14 +127,14 @@ const SignUp = () => {
         <div className='wrapper-signup'>
             <div className="signup-cover">
                 <Link to={'/'}>
-                <img className='signup-close' src="/assets/close.svg" alt="" />
+                    <img className='signup-close' src="/assets/close.svg" alt="" />
                 </Link>
                 <div className='signup'>
                     <h1>Create a new Account</h1>
                     <form onSubmit={handleSubmit}>
-                            <div className='i-signup-div'>
-                                <input onChange={handleChange} name="name" type="text" placeholder="Name" value={formData.fname} required />
-                            </div>
+                        <div className='i-signup-div'>
+                            <input onChange={handleChange} name="name" type="text" placeholder="Name" value={formData.fname} required />
+                        </div>
                         <div className='i-signup-div gender'>
                             <h3>Gender</h3>
                             <div className='gender-div'>
