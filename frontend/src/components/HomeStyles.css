@@ -2,3 +2,10 @@
     width: 80%;
     margin: auto;
 }
+
+.home-spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55vh;
+}
