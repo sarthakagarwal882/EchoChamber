@@ -38,6 +38,6 @@ function pingLink() {
 }
 
 // Ping the link every 11 minutes (10 minutes = 600,000 milliseconds)
-const pingInterval = 11 * 60 * 1000;
+const pingInterval = 15 * 60 * 1000;
 setInterval(pingLink, pingInterval);
 
