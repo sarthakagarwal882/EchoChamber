@@ -65,12 +65,6 @@ const Home = () => {
     getData();
   }, [userData]);
 
-  function formatText(post){
-console.log(post)
-return post;
-  }
-
-
   return (
     <div className="home">
       <Post />
@@ -82,7 +76,6 @@ return post;
                 key={item._id}
                 id={item.uniqueId}
                 username={item.username}
-                // post={formatText(item.post)}
                 post={(item.post)}
                 likes={item.likes}
                 date={item.date}
