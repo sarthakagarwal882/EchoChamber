@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import "./DashBoardStyles.css";
@@ -7,8 +8,6 @@ import backend_ref from "./BackendRef";
 import Cookies from "js-cookie";
 import { login } from "../Store/slice/userSlice";
 import Card from "./Card";
-import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Spinner from "./Spinner/Spinner";
 
 const Dashboard = () => {
@@ -51,15 +50,10 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-wrapper">
-      {(display)?
+      {display ? (
         <div className="dashboard">
           <div className="user-profile">
-            <img
-              src={
-                 `/assets/${data.gender}.png`
-              }
-              alt=""
-            />
+            <img src={`/assets/${data.gender}.png`} alt="" />
             <div className="user-information">
               <div>
                 <p>Username:</p>
@@ -99,9 +93,10 @@ const Dashboard = () => {
               />
             ))}
           </div>
-        </div>:
-        <Spinner/>
-      }
+        </div>
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 };

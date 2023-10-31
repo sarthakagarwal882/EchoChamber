@@ -6,6 +6,7 @@ import HomeRoute from './routes/HomeRoute'
 import CreatePostRoute from './routes/CreatePostRoute'
 import ForgotPassRoute from './routes/ForgotPassRoute'
 import DashboardRoute from './routes/DashboardRoute'
+import { ToastContainer } from 'react-toastify'
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,18 @@ function App() {
         </Route>
         <Route path='/forgot_password' element={<ForgotPassRoute />} />
       </Routes>
+      <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
     </BrowserRouter>
   )
 }
