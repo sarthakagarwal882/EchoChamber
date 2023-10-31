@@ -2,7 +2,7 @@
 
 ## Overview
 
-Echo Chamber is a web application built with Node.js and React.js, designed to provide a dynamic and interactive user experience. It incorporates various technologies and packages for state management, user authentication, and secure communication.
+Echo Chamber is a web application built with MERN stack, designed to provide a dynamic and interactive user experience. It incorporates various technologies and packages for state management, user authentication, and secure communication.
 
 ## Deployment
 
