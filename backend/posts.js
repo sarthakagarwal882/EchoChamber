@@ -67,7 +67,7 @@ async function getPosts(message, res) {
                     liked: false
                 }
             ))
-            res.json(finalData);
+            res.json(finalData.reverse());
         }
         else {
             let finalData = data.map(element => {
@@ -86,8 +86,7 @@ async function getPosts(message, res) {
                 })
             }
             )
-
-            res.json(finalData);
+            res.json(finalData.reverse());
         }
 
     }

@@ -71,7 +71,7 @@ const CreatePost = () => {
                 <div className="createpost">
 
                     <div className='user-info'>
-                        <img src="/assets/man.png" alt="" />
+                        <img src={`/assets/${user.gender}.png`} alt="" />
                         <p>{user.username}</p>
                     </div>
                     <div className='createpost-form'>

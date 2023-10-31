@@ -143,7 +143,7 @@ const Card = (props) => {
         <div className="card">
             <div className="card-header">
                 <div className='card-user'>
-                    <img src={(data.gender === 'male') ? '/assets/man.png' : '/assets/woman.png'} alt="" />
+                    <img src={`/assets/${data.gender}.png`} alt="" />
                     <p>{data.username}</p>
                 </div>
                 <div className='card-date'>
@@ -158,7 +158,7 @@ const Card = (props) => {
                         {(showInputPost) ?
                             <textarea value={inputPost} name='inputPost' onChange={handleInputPostChange} />
                             :
-                            <p>{data.post}</p>
+                            <p dangerouslySetInnerHTML={{__html: (data.post).replace(/\n/g, '<br>')}}/>
                         }
                     </div>
                     <div className='like-comment-edit'>

@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from "react-redux"
 import Cookies from "js-cookie"
 import { login } from "../Store/slice/userSlice"
 import { toast,ToastContainer } from "react-toastify"
+import axios from "axios"
+import backend_ref from "./BackendRef"
+import { addData } from "../Store/slice/AllPostSlice"
 const Navbar = () => {
     const dispatch = useDispatch()
     const navigateTo = useNavigate()
@@ -37,10 +40,14 @@ const Navbar = () => {
         setDropdown((dropDown == 'none') ? 'flex' : 'none')
     }
 
-    function handleLogout() {
+    async function handleLogout() {
         Cookies.remove('echoChamberCred')
         toast('Logged out Sucessfully!')
         dispatch(login({}))
+        const data = await axios.post(backend_ref + "/getData", {
+            data: { username: "" },
+          });
+          dispatch(addData(data.data))
         navigateTo('/')
     }
 
